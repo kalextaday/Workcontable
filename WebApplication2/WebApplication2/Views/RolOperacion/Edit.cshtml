@@ -1,0 +1,107 @@
+﻿@model List<WebApplication2.Models.TableViewModels.PermisoTableViewModel>
+@{
+    ViewBag.Title = "Otorgar Permisos";
+    ViewBag.nombre_button = "";
+
+    //ViewBag.Rol = Model.FirstOrDefault().rol_nombre;
+
+    /*
+    if (ViewBag.rol == 1)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else if (ViewBag.rol == 2)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    */
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <div>
+        <h3>Usuario Destino</h3>
+        @Html.DropDownList("usuario_destino", (List<SelectListItem>)ViewBag.opc_user, new { @class = "form-control",@id="id_usuario", @required = "required" })<br />
+        
+    </div>
+
+    <div class="col-lg-12">
+        <table class="table table-bordered table-responsive">
+            <tr>
+                <th>Id Rol Operacion</th>
+                <th>Rol</th>
+                <th>Modulo</th>
+                <th>Operacion</th>
+                <th></th>
+            </tr>
+            @foreach (var oElemento in Model)
+            {
+                <tr>
+                    <td>@oElemento.id_rol_operacion</td>
+                    <td>@oElemento.rol_nombre</td>
+                    <td>@oElemento.modulo_nombre</td>
+                    @{
+                        if (@oElemento.operacion_nombre == "Agregar")
+                        {
+                            ViewBag.ctd = "success";
+                        }
+                        else if (@oElemento.operacion_nombre == "Editar")
+                        {
+                            ViewBag.ctd = "warning";
+                        }
+                        else if (@oElemento.operacion_nombre == "Ver")
+                        {
+                            ViewBag.ctd = "info";
+                        }
+                        else
+                        {
+                            ViewBag.ctd = "Danger";
+                        }
+                    }
+                    <td class=@ViewBag.ctd>@oElemento.operacion_nombre</td>
+                    <td>
+                        <input id="@oElemento.id_rol_operacion" type="button" value="Otorgar Permiso" class="btn btn-info" onclick="jsOtorgarPermiso(@oElemento.id_rol_operacion)" />
+                    </td>
+                </tr>
+             }
+        </table>
+    </div>
+    <div id="result"></div>
+</div>
+
+
+<script>
+    var selectElement = document.querySelector('#id_usuario');
+    var id_usu_d;
+    selectElement.addEventListener('change', (event) => {
+        id_usu_d = event.target.value;
+    });
+
+    function jsOtorgarPermiso(id) {
+        if (confirm("Seguro que desea otorgar el permiso a " + id_usu_d+" ?")) {
+
+            var url = "@Url.Action("Grant", "RolOperacion", new { id="param-id", usu_dest_id = "param-name" })";
+            url = url.replace("param-id", id)
+                 .replace("param-name", id_usu_d);
+
+            $.get(url);
+            //jsDesabiBoton(id);//desabilitar los botones
+        }
+    }
+
+    function jsDesabiBoton(id_boton) {
+        var boton = document.getElementById(id_boton);
+        boton.disabled = true;
+    }
+</script>

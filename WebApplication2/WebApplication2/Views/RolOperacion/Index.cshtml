@@ -1,0 +1,78 @@
+﻿@model List<WebApplication2.Models.TableViewModels.PermisoTableViewModel>
+@{
+    ViewBag.Title = "Rol-Operaciones";
+    
+    ViewBag.Rol = Model.FirstOrDefault().rol_nombre;
+
+    /*
+    if (ViewBag.rol == 1)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else if (ViewBag.rol == 2)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    */
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="row">
+    <h3>Rol: @ViewBag.Rol</h3>
+</div>
+<br />
+
+<div>
+    <div class="col-lg-12">
+        <table class="table table-bordered table-responsive">
+            <tr>
+                <th>Id Rol Operacion</th>
+                <th>Rol</th>
+                <th>Modulo</th>
+                <th>Operacion</th>
+            </tr>
+            @foreach (var oElemento in Model)
+            {
+                <tr>
+                    <td>@oElemento.id_rol_operacion</td>
+                    <td>@oElemento.rol_nombre</td>
+                    <td>@oElemento.modulo_nombre</td>
+                    @{ 
+                        if (@oElemento.operacion_nombre=="Agregar")
+                        {
+                            ViewBag.ctd = "success";
+                        }else if (@oElemento.operacion_nombre == "Editar")
+                        {
+                            ViewBag.ctd = "warning";
+                        }
+                        else if (@oElemento.operacion_nombre == "Ver")
+                        {
+                            ViewBag.ctd = "info";
+                        }
+                        else
+                        {
+                            ViewBag.ctd = "Danger";
+                        }
+                    }
+                    <td class=@ViewBag.ctd>@oElemento.operacion_nombre</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-12 style="text-align:right;">
+            <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/RolOperacion/Edit/"+ViewBag.id_usuario)'" value="Conceder Permisos" />
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,1085 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ESTADO_RESULTADO">
+          <Key>
+            <PropertyRef Name="ID_EST_RES" />
+          </Key>
+          <Property Name="ID_EST_RES" Type="number" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LIB_CONTABLE_ID" Type="number" Precision="8" Scale="0" />
+          <Property Name="UTILIDAD_BRUTA" Type="number" Precision="10" Scale="3" />
+          <Property Name="UTILIDAD_ANTES_IMP" Type="number" Precision="10" Scale="3" />
+          <Property Name="UTILIDAD_EJERCICIO" Type="number" Precision="10" Scale="3" />
+          <Property Name="FECHA_INICIO" Type="timestamp" Precision="6" />
+          <Property Name="FECHA_FIN" Type="timestamp" Precision="6" />
+        </EntityType>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="ID_FACTURA" />
+          </Key>
+          <Property Name="ID_FACTURA" Type="number" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TRANS_REAL_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NUMERO" Type="varchar2" MaxLength="50" />
+          <Property Name="FOTO" Type="blob" />
+        </EntityType>
+        <EntityType Name="LIBRO_CONTABLE">
+          <Key>
+            <PropertyRef Name="ID_LIB_CONTABLE" />
+          </Key>
+          <Property Name="ID_LIB_CONTABLE" Type="number" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USU_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="FECHA_INICIO" Type="timestamp" Precision="6" Nullable="false" />
+          <Property Name="FECHA_FIN" Type="timestamp" Precision="6" Nullable="false" />
+          <Property Name="TOTAL_INGRESOS" Type="number" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="TOTAL_GASTOS" Type="number" Precision="10" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MODULO">
+          <Key>
+            <PropertyRef Name="ID_MODULO" />
+          </Key>
+          <Property Name="ID_MODULO" Type="number" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar2" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="OPERACION">
+          <Key>
+            <PropertyRef Name="ID_OPERACION" />
+          </Key>
+          <Property Name="ID_OPERACION" Type="number" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar2" MaxLength="50" />
+          <Property Name="MODULO_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRESUPUESTO">
+          <Key>
+            <PropertyRef Name="ID_PRESUPUESTO" />
+          </Key>
+          <Property Name="ID_PRESUPUESTO" Type="number" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USU_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="FECHA_INICIO" Type="timestamp" Precision="6" Nullable="false" />
+          <Property Name="FECHA_FIN" Type="timestamp" Precision="6" Nullable="false" />
+          <Property Name="VALOR_PRE" Type="number" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="TOTAL_GASTOS" Type="number" Precision="10" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REG_DET_LIBROS">
+          <Key>
+            <PropertyRef Name="ID_REG_DET_LIB" />
+          </Key>
+          <Property Name="ID_REG_DET_LIB" Type="number" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TRA_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="LIB_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REG_DET_PRESUPUESTOS">
+          <Key>
+            <PropertyRef Name="ID_REG_DET_PRE" />
+          </Key>
+          <Property Name="ID_REG_DET_PRE" Type="number" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRE_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="TRA_PRE_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="ID_ROL" />
+          </Key>
+          <Property Name="ID_ROL" Type="number" Precision="2" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROL_OPERACION">
+          <Key>
+            <PropertyRef Name="ID_ROL_OPERACION" />
+          </Key>
+          <Property Name="ID_ROL_OPERACION" Type="number" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USUARIO_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="OPERACION_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ESTADO" Type="number" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RUBRO">
+          <Key>
+            <PropertyRef Name="ID_RUBRO" />
+          </Key>
+          <Property Name="ID_RUBRO" Type="number" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TRANSACCION_PRE">
+          <Key>
+            <PropertyRef Name="ID_TRANS_PRE" />
+          </Key>
+          <Property Name="ID_TRANS_PRE" Type="number" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RUB_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="TIPO" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="FECHA" Type="timestamp" Precision="6" Nullable="false" />
+          <Property Name="SUBTOTAL" Type="number" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="IMPUESTO" Type="number" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="TOTAL" Type="number" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="USU_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TRANSACCION_REAL">
+          <Key>
+            <PropertyRef Name="ID_TRANS_REAL" />
+          </Key>
+          <Property Name="ID_TRANS_REAL" Type="number" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RUB_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="FACTURA_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="TIPO" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="FECHA" Type="timestamp" Precision="6" Nullable="false" />
+          <Property Name="SUBTOTAL" Type="number" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="IMPUESTO" Type="number" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="TOTAL" Type="number" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="USU_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="number" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ROL_ID" Type="number" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_USUARIO" Type="varchar2" MaxLength="60" Nullable="false" />
+          <Property Name="PASSWORD" Type="varchar2" MaxLength="200" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="200" Nullable="false" />
+          <Property Name="APELLIDO" Type="varchar2" MaxLength="200" Nullable="false" />
+          <Property Name="CEDULA" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="RUC" Type="varchar2" MaxLength="15" Nullable="false" />
+          <Property Name="DIRECCION" Type="varchar2" MaxLength="200" />
+          <Property Name="TELEFONO" Type="varchar2" MaxLength="10" />
+          <Property Name="EMAIL" Type="varchar2" MaxLength="150" />
+        </EntityType>
+        <Association Name="FK_ESTADO_R_RELATIONS_LIBRO_CO">
+          <End Role="LIBRO_CONTABLE" Type="Self.LIBRO_CONTABLE" Multiplicity="0..1" />
+          <End Role="ESTADO_RESULTADO" Type="Self.ESTADO_RESULTADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LIBRO_CONTABLE">
+              <PropertyRef Name="ID_LIB_CONTABLE" />
+            </Principal>
+            <Dependent Role="ESTADO_RESULTADO">
+              <PropertyRef Name="LIB_CONTABLE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FACTURA_RELATIONS_TRANSACC">
+          <End Role="TRANSACCION_REAL" Type="Self.TRANSACCION_REAL" Multiplicity="1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSACCION_REAL">
+              <PropertyRef Name="ID_TRANS_REAL" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="TRANS_REAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LIBRO_CO_RELATIONS_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="LIBRO_CONTABLE" Type="Self.LIBRO_CONTABLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="LIBRO_CONTABLE">
+              <PropertyRef Name="USU_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRESUPUE_RELATIONS_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="PRESUPUESTO" Type="Self.PRESUPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="PRESUPUESTO">
+              <PropertyRef Name="USU_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REG_DET__RELATIONS_LIBRO_CO">
+          <End Role="LIBRO_CONTABLE" Type="Self.LIBRO_CONTABLE" Multiplicity="1" />
+          <End Role="REG_DET_LIBROS" Type="Self.REG_DET_LIBROS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LIBRO_CONTABLE">
+              <PropertyRef Name="ID_LIB_CONTABLE" />
+            </Principal>
+            <Dependent Role="REG_DET_LIBROS">
+              <PropertyRef Name="LIB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REG_DET__RELATIONS_PRESUPUE">
+          <End Role="PRESUPUESTO" Type="Self.PRESUPUESTO" Multiplicity="1" />
+          <End Role="REG_DET_PRESUPUESTOS" Type="Self.REG_DET_PRESUPUESTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESUPUESTO">
+              <PropertyRef Name="ID_PRESUPUESTO" />
+            </Principal>
+            <Dependent Role="REG_DET_PRESUPUESTOS">
+              <PropertyRef Name="PRE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REG_DET__RELATIONS_TRANSACC">
+          <End Role="TRANSACCION_REAL" Type="Self.TRANSACCION_REAL" Multiplicity="1" />
+          <End Role="REG_DET_LIBROS" Type="Self.REG_DET_LIBROS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSACCION_REAL">
+              <PropertyRef Name="ID_TRANS_REAL" />
+            </Principal>
+            <Dependent Role="REG_DET_LIBROS">
+              <PropertyRef Name="TRA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACC_PRE_RUBRO">
+          <End Role="RUBRO" Type="Self.RUBRO" Multiplicity="1" />
+          <End Role="TRANSACCION_PRE" Type="Self.TRANSACCION_PRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RUBRO">
+              <PropertyRef Name="ID_RUBRO" />
+            </Principal>
+            <Dependent Role="TRANSACCION_PRE">
+              <PropertyRef Name="RUB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACC_REAL_RUBRO">
+          <End Role="RUBRO" Type="Self.RUBRO" Multiplicity="1" />
+          <End Role="TRANSACCION_REAL" Type="Self.TRANSACCION_REAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RUBRO">
+              <PropertyRef Name="ID_RUBRO" />
+            </Principal>
+            <Dependent Role="TRANSACCION_REAL">
+              <PropertyRef Name="RUB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACC_RELATIONS_FACTURA">
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="1" />
+          <End Role="TRANSACCION_REAL" Type="Self.TRANSACCION_REAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURA">
+              <PropertyRef Name="ID_FACTURA" />
+            </Principal>
+            <Dependent Role="TRANSACCION_REAL">
+              <PropertyRef Name="FACTURA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_RELATIONS_ROL">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="ID_ROL" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ROL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OPER_MODULO_ID_MODULO_FK">
+          <End Role="MODULO" Type="Self.MODULO" Multiplicity="1" />
+          <End Role="OPERACION" Type="Self.OPERACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MODULO">
+              <PropertyRef Name="ID_MODULO" />
+            </Principal>
+            <Dependent Role="OPERACION">
+              <PropertyRef Name="MODULO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="REG_DET_PRES_TRA_P___FK">
+          <End Role="TRANSACCION_PRE" Type="Self.TRANSACCION_PRE" Multiplicity="1" />
+          <End Role="REG_DET_PRESUPUESTOS" Type="Self.REG_DET_PRESUPUESTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSACCION_PRE">
+              <PropertyRef Name="ID_TRANS_PRE" />
+            </Principal>
+            <Dependent Role="REG_DET_PRESUPUESTOS">
+              <PropertyRef Name="TRA_PRE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ROL_OPE_OPERA__FK">
+          <End Role="OPERACION" Type="Self.OPERACION" Multiplicity="1" />
+          <End Role="ROL_OPERACION" Type="Self.ROL_OPERACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERACION">
+              <PropertyRef Name="ID_OPERACION" />
+            </Principal>
+            <Dependent Role="ROL_OPERACION">
+              <PropertyRef Name="OPERACION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ROL_OPER_USU___FK">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="ROL_OPERACION" Type="Self.ROL_OPERACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="ROL_OPERACION">
+              <PropertyRef Name="USUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TRANSA_PRE_USUARIO__FK">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="TRANSACCION_PRE" Type="Self.TRANSACCION_PRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="TRANSACCION_PRE">
+              <PropertyRef Name="USU_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TRANSA_REAL_USUARIO__FK">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="TRANSACCION_REAL" Type="Self.TRANSACCION_REAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="TRANSACCION_REAL">
+              <PropertyRef Name="USU_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="ESTADO_RESULTADO" EntityType="Self.ESTADO_RESULTADO" Schema="PRUEBA" store:Type="Tables" />
+          <EntitySet Name="FACTURA" EntityType="Self.FACTURA" Schema="PRUEBA" store:Type="Tables" />
+          <EntitySet Name="LIBRO_CONTABLE" EntityType="Self.LIBRO_CONTABLE" Schema="PRUEBA" store:Type="Tables" />
+          <EntitySet Name="MODULO" EntityType="Self.MODULO" Schema="PRUEBA" store:Type="Tables" />
+          <EntitySet Name="OPERACION" EntityType="Self.OPERACION" Schema="PRUEBA" store:Type="Tables" />
+          <EntitySet Name="PRESUPUESTO" EntityType="Self.PRESUPUESTO" Schema="PRUEBA" store:Type="Tables" />
+          <EntitySet Name="REG_DET_LIBROS" EntityType="Self.REG_DET_LIBROS" Schema="PRUEBA" store:Type="Tables" />
+          <EntitySet Name="REG_DET_PRESUPUESTOS" EntityType="Self.REG_DET_PRESUPUESTOS" Schema="PRUEBA" store:Type="Tables" />
+          <EntitySet Name="ROL" EntityType="Self.ROL" Schema="PRUEBA" store:Type="Tables" />
+          <EntitySet Name="ROL_OPERACION" EntityType="Self.ROL_OPERACION" Schema="PRUEBA" store:Type="Tables" />
+          <EntitySet Name="RUBRO" EntityType="Self.RUBRO" Schema="PRUEBA" store:Type="Tables" />
+          <EntitySet Name="TRANSACCION_PRE" EntityType="Self.TRANSACCION_PRE" Schema="PRUEBA" store:Type="Tables" />
+          <EntitySet Name="TRANSACCION_REAL" EntityType="Self.TRANSACCION_REAL" Schema="PRUEBA" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="PRUEBA" store:Type="Tables" />
+          <AssociationSet Name="FK_ESTADO_R_RELATIONS_LIBRO_CO" Association="Self.FK_ESTADO_R_RELATIONS_LIBRO_CO">
+            <End Role="LIBRO_CONTABLE" EntitySet="LIBRO_CONTABLE" />
+            <End Role="ESTADO_RESULTADO" EntitySet="ESTADO_RESULTADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_RELATIONS_TRANSACC" Association="Self.FK_FACTURA_RELATIONS_TRANSACC">
+            <End Role="TRANSACCION_REAL" EntitySet="TRANSACCION_REAL" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LIBRO_CO_RELATIONS_USUARIO" Association="Self.FK_LIBRO_CO_RELATIONS_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="LIBRO_CONTABLE" EntitySet="LIBRO_CONTABLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESUPUE_RELATIONS_USUARIO" Association="Self.FK_PRESUPUE_RELATIONS_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="PRESUPUESTO" EntitySet="PRESUPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REG_DET__RELATIONS_LIBRO_CO" Association="Self.FK_REG_DET__RELATIONS_LIBRO_CO">
+            <End Role="LIBRO_CONTABLE" EntitySet="LIBRO_CONTABLE" />
+            <End Role="REG_DET_LIBROS" EntitySet="REG_DET_LIBROS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REG_DET__RELATIONS_PRESUPUE" Association="Self.FK_REG_DET__RELATIONS_PRESUPUE">
+            <End Role="PRESUPUESTO" EntitySet="PRESUPUESTO" />
+            <End Role="REG_DET_PRESUPUESTOS" EntitySet="REG_DET_PRESUPUESTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REG_DET__RELATIONS_TRANSACC" Association="Self.FK_REG_DET__RELATIONS_TRANSACC">
+            <End Role="TRANSACCION_REAL" EntitySet="TRANSACCION_REAL" />
+            <End Role="REG_DET_LIBROS" EntitySet="REG_DET_LIBROS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACC_PRE_RUBRO" Association="Self.FK_TRANSACC_PRE_RUBRO">
+            <End Role="RUBRO" EntitySet="RUBRO" />
+            <End Role="TRANSACCION_PRE" EntitySet="TRANSACCION_PRE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACC_REAL_RUBRO" Association="Self.FK_TRANSACC_REAL_RUBRO">
+            <End Role="RUBRO" EntitySet="RUBRO" />
+            <End Role="TRANSACCION_REAL" EntitySet="TRANSACCION_REAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACC_RELATIONS_FACTURA" Association="Self.FK_TRANSACC_RELATIONS_FACTURA">
+            <End Role="FACTURA" EntitySet="FACTURA" />
+            <End Role="TRANSACCION_REAL" EntitySet="TRANSACCION_REAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_RELATIONS_ROL" Association="Self.FK_USUARIO_RELATIONS_ROL">
+            <End Role="ROL" EntitySet="ROL" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="OPER_MODULO_ID_MODULO_FK" Association="Self.OPER_MODULO_ID_MODULO_FK">
+            <End Role="MODULO" EntitySet="MODULO" />
+            <End Role="OPERACION" EntitySet="OPERACION" />
+          </AssociationSet>
+          <AssociationSet Name="REG_DET_PRES_TRA_P___FK" Association="Self.REG_DET_PRES_TRA_P___FK">
+            <End Role="TRANSACCION_PRE" EntitySet="TRANSACCION_PRE" />
+            <End Role="REG_DET_PRESUPUESTOS" EntitySet="REG_DET_PRESUPUESTOS" />
+          </AssociationSet>
+          <AssociationSet Name="ROL_OPE_OPERA__FK" Association="Self.ROL_OPE_OPERA__FK">
+            <End Role="OPERACION" EntitySet="OPERACION" />
+            <End Role="ROL_OPERACION" EntitySet="ROL_OPERACION" />
+          </AssociationSet>
+          <AssociationSet Name="ROL_OPER_USU___FK" Association="Self.ROL_OPER_USU___FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="ROL_OPERACION" EntitySet="ROL_OPERACION" />
+          </AssociationSet>
+          <AssociationSet Name="TRANSA_PRE_USUARIO__FK" Association="Self.TRANSA_PRE_USUARIO__FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="TRANSACCION_PRE" EntitySet="TRANSACCION_PRE" />
+          </AssociationSet>
+          <AssociationSet Name="TRANSA_REAL_USUARIO__FK" Association="Self.TRANSA_REAL_USUARIO__FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="TRANSACCION_REAL" EntitySet="TRANSACCION_REAL" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ESTADO_RESULTADO" EntityType="Model.ESTADO_RESULTADO" />
+          <EntitySet Name="FACTURA" EntityType="Model.FACTURA" />
+          <EntitySet Name="LIBRO_CONTABLE" EntityType="Model.LIBRO_CONTABLE" />
+          <EntitySet Name="MODULO" EntityType="Model.MODULO" />
+          <EntitySet Name="OPERACION" EntityType="Model.OPERACION" />
+          <EntitySet Name="PRESUPUESTO" EntityType="Model.PRESUPUESTO" />
+          <EntitySet Name="REG_DET_LIBROS" EntityType="Model.REG_DET_LIBROS" />
+          <EntitySet Name="REG_DET_PRESUPUESTOS" EntityType="Model.REG_DET_PRESUPUESTOS" />
+          <EntitySet Name="ROL" EntityType="Model.ROL" />
+          <EntitySet Name="ROL_OPERACION" EntityType="Model.ROL_OPERACION" />
+          <EntitySet Name="RUBRO" EntityType="Model.RUBRO" />
+          <EntitySet Name="TRANSACCION_PRE" EntityType="Model.TRANSACCION_PRE" />
+          <EntitySet Name="TRANSACCION_REAL" EntityType="Model.TRANSACCION_REAL" />
+          <EntitySet Name="USUARIO" EntityType="Model.USUARIO" />
+          <AssociationSet Name="FK_ESTADO_R_RELATIONS_LIBRO_CO" Association="Model.FK_ESTADO_R_RELATIONS_LIBRO_CO">
+            <End Role="LIBRO_CONTABLE" EntitySet="LIBRO_CONTABLE" />
+            <End Role="ESTADO_RESULTADO" EntitySet="ESTADO_RESULTADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_RELATIONS_TRANSACC" Association="Model.FK_FACTURA_RELATIONS_TRANSACC">
+            <End Role="TRANSACCION_REAL" EntitySet="TRANSACCION_REAL" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACC_RELATIONS_FACTURA" Association="Model.FK_TRANSACC_RELATIONS_FACTURA">
+            <End Role="FACTURA" EntitySet="FACTURA" />
+            <End Role="TRANSACCION_REAL" EntitySet="TRANSACCION_REAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LIBRO_CO_RELATIONS_USUARIO" Association="Model.FK_LIBRO_CO_RELATIONS_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="LIBRO_CONTABLE" EntitySet="LIBRO_CONTABLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REG_DET__RELATIONS_LIBRO_CO" Association="Model.FK_REG_DET__RELATIONS_LIBRO_CO">
+            <End Role="LIBRO_CONTABLE" EntitySet="LIBRO_CONTABLE" />
+            <End Role="REG_DET_LIBROS" EntitySet="REG_DET_LIBROS" />
+          </AssociationSet>
+          <AssociationSet Name="OPER_MODULO_ID_MODULO_FK" Association="Model.OPER_MODULO_ID_MODULO_FK">
+            <End Role="MODULO" EntitySet="MODULO" />
+            <End Role="OPERACION" EntitySet="OPERACION" />
+          </AssociationSet>
+          <AssociationSet Name="ROL_OPE_OPERA__FK" Association="Model.ROL_OPE_OPERA__FK">
+            <End Role="OPERACION" EntitySet="OPERACION" />
+            <End Role="ROL_OPERACION" EntitySet="ROL_OPERACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESUPUE_RELATIONS_USUARIO" Association="Model.FK_PRESUPUE_RELATIONS_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="PRESUPUESTO" EntitySet="PRESUPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REG_DET__RELATIONS_PRESUPUE" Association="Model.FK_REG_DET__RELATIONS_PRESUPUE">
+            <End Role="PRESUPUESTO" EntitySet="PRESUPUESTO" />
+            <End Role="REG_DET_PRESUPUESTOS" EntitySet="REG_DET_PRESUPUESTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REG_DET__RELATIONS_TRANSACC" Association="Model.FK_REG_DET__RELATIONS_TRANSACC">
+            <End Role="TRANSACCION_REAL" EntitySet="TRANSACCION_REAL" />
+            <End Role="REG_DET_LIBROS" EntitySet="REG_DET_LIBROS" />
+          </AssociationSet>
+          <AssociationSet Name="REG_DET_PRES_TRA_P___FK" Association="Model.REG_DET_PRES_TRA_P___FK">
+            <End Role="TRANSACCION_PRE" EntitySet="TRANSACCION_PRE" />
+            <End Role="REG_DET_PRESUPUESTOS" EntitySet="REG_DET_PRESUPUESTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_RELATIONS_ROL" Association="Model.FK_USUARIO_RELATIONS_ROL">
+            <End Role="ROL" EntitySet="ROL" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="ROL_OPER_USU___FK" Association="Model.ROL_OPER_USU___FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="ROL_OPERACION" EntitySet="ROL_OPERACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACC_PRE_RUBRO" Association="Model.FK_TRANSACC_PRE_RUBRO">
+            <End Role="RUBRO" EntitySet="RUBRO" />
+            <End Role="TRANSACCION_PRE" EntitySet="TRANSACCION_PRE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSACC_REAL_RUBRO" Association="Model.FK_TRANSACC_REAL_RUBRO">
+            <End Role="RUBRO" EntitySet="RUBRO" />
+            <End Role="TRANSACCION_REAL" EntitySet="TRANSACCION_REAL" />
+          </AssociationSet>
+          <AssociationSet Name="TRANSA_PRE_USUARIO__FK" Association="Model.TRANSA_PRE_USUARIO__FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="TRANSACCION_PRE" EntitySet="TRANSACCION_PRE" />
+          </AssociationSet>
+          <AssociationSet Name="TRANSA_REAL_USUARIO__FK" Association="Model.TRANSA_REAL_USUARIO__FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="TRANSACCION_REAL" EntitySet="TRANSACCION_REAL" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ESTADO_RESULTADO">
+          <Key>
+            <PropertyRef Name="ID_EST_RES" />
+          </Key>
+          <Property Name="ID_EST_RES" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LIB_CONTABLE_ID" Type="Int32" />
+          <Property Name="UTILIDAD_BRUTA" Type="Decimal" Precision="10" Scale="3" />
+          <Property Name="UTILIDAD_ANTES_IMP" Type="Decimal" Precision="10" Scale="3" />
+          <Property Name="UTILIDAD_EJERCICIO" Type="Decimal" Precision="10" Scale="3" />
+          <Property Name="FECHA_INICIO" Type="DateTime" Precision="6" />
+          <Property Name="FECHA_FIN" Type="DateTime" Precision="6" />
+          <NavigationProperty Name="LIBRO_CONTABLE" Relationship="Model.FK_ESTADO_R_RELATIONS_LIBRO_CO" FromRole="ESTADO_RESULTADO" ToRole="LIBRO_CONTABLE" />
+        </EntityType>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="ID_FACTURA" />
+          </Key>
+          <Property Name="ID_FACTURA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TRANS_REAL_ID" Type="Int32" Nullable="false" />
+          <Property Name="NUMERO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="TRANSACCION_REAL" Relationship="Model.FK_FACTURA_RELATIONS_TRANSACC" FromRole="FACTURA" ToRole="TRANSACCION_REAL" />
+          <NavigationProperty Name="TRANSACCION_REAL1" Relationship="Model.FK_TRANSACC_RELATIONS_FACTURA" FromRole="FACTURA" ToRole="TRANSACCION_REAL" />
+        </EntityType>
+        <EntityType Name="LIBRO_CONTABLE">
+          <Key>
+            <PropertyRef Name="ID_LIB_CONTABLE" />
+          </Key>
+          <Property Name="ID_LIB_CONTABLE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USU_ID" Type="Int32" Nullable="false" />
+          <Property Name="FECHA_INICIO" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="FECHA_FIN" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="TOTAL_INGRESOS" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="TOTAL_GASTOS" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <NavigationProperty Name="ESTADO_RESULTADO" Relationship="Model.FK_ESTADO_R_RELATIONS_LIBRO_CO" FromRole="LIBRO_CONTABLE" ToRole="ESTADO_RESULTADO" />
+          <NavigationProperty Name="USUARIO" Relationship="Model.FK_LIBRO_CO_RELATIONS_USUARIO" FromRole="LIBRO_CONTABLE" ToRole="USUARIO" />
+          <NavigationProperty Name="REG_DET_LIBROS" Relationship="Model.FK_REG_DET__RELATIONS_LIBRO_CO" FromRole="LIBRO_CONTABLE" ToRole="REG_DET_LIBROS" />
+        </EntityType>
+        <EntityType Name="MODULO">
+          <Key>
+            <PropertyRef Name="ID_MODULO" />
+          </Key>
+          <Property Name="ID_MODULO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OPERACION" Relationship="Model.OPER_MODULO_ID_MODULO_FK" FromRole="MODULO" ToRole="OPERACION" />
+        </EntityType>
+        <EntityType Name="OPERACION">
+          <Key>
+            <PropertyRef Name="ID_OPERACION" />
+          </Key>
+          <Property Name="ID_OPERACION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MODULO_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MODULO" Relationship="Model.OPER_MODULO_ID_MODULO_FK" FromRole="OPERACION" ToRole="MODULO" />
+          <NavigationProperty Name="ROL_OPERACION" Relationship="Model.ROL_OPE_OPERA__FK" FromRole="OPERACION" ToRole="ROL_OPERACION" />
+        </EntityType>
+        <EntityType Name="PRESUPUESTO">
+          <Key>
+            <PropertyRef Name="ID_PRESUPUESTO" />
+          </Key>
+          <Property Name="ID_PRESUPUESTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USU_ID" Type="Int32" Nullable="false" />
+          <Property Name="FECHA_INICIO" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="FECHA_FIN" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="VALOR_PRE" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="TOTAL_GASTOS" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <NavigationProperty Name="USUARIO" Relationship="Model.FK_PRESUPUE_RELATIONS_USUARIO" FromRole="PRESUPUESTO" ToRole="USUARIO" />
+          <NavigationProperty Name="REG_DET_PRESUPUESTOS" Relationship="Model.FK_REG_DET__RELATIONS_PRESUPUE" FromRole="PRESUPUESTO" ToRole="REG_DET_PRESUPUESTOS" />
+        </EntityType>
+        <EntityType Name="REG_DET_LIBROS">
+          <Key>
+            <PropertyRef Name="ID_REG_DET_LIB" />
+          </Key>
+          <Property Name="ID_REG_DET_LIB" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TRA_ID" Type="Int32" Nullable="false" />
+          <Property Name="LIB_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LIBRO_CONTABLE" Relationship="Model.FK_REG_DET__RELATIONS_LIBRO_CO" FromRole="REG_DET_LIBROS" ToRole="LIBRO_CONTABLE" />
+          <NavigationProperty Name="TRANSACCION_REAL" Relationship="Model.FK_REG_DET__RELATIONS_TRANSACC" FromRole="REG_DET_LIBROS" ToRole="TRANSACCION_REAL" />
+        </EntityType>
+        <EntityType Name="REG_DET_PRESUPUESTOS">
+          <Key>
+            <PropertyRef Name="ID_REG_DET_PRE" />
+          </Key>
+          <Property Name="ID_REG_DET_PRE" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRE_ID" Type="Int32" Nullable="false" />
+          <Property Name="TRA_PRE_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PRESUPUESTO" Relationship="Model.FK_REG_DET__RELATIONS_PRESUPUE" FromRole="REG_DET_PRESUPUESTOS" ToRole="PRESUPUESTO" />
+          <NavigationProperty Name="TRANSACCION_PRE" Relationship="Model.REG_DET_PRES_TRA_P___FK" FromRole="REG_DET_PRESUPUESTOS" ToRole="TRANSACCION_PRE" />
+        </EntityType>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="ID_ROL" />
+          </Key>
+          <Property Name="ID_ROL" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Model.FK_USUARIO_RELATIONS_ROL" FromRole="ROL" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="ROL_OPERACION">
+          <Key>
+            <PropertyRef Name="ID_ROL_OPERACION" />
+          </Key>
+          <Property Name="ID_ROL_OPERACION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USUARIO_ID" Type="Int32" Nullable="false" />
+          <Property Name="OPERACION_ID" Type="Int32" Nullable="false" />
+          <Property Name="ESTADO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="OPERACION" Relationship="Model.ROL_OPE_OPERA__FK" FromRole="ROL_OPERACION" ToRole="OPERACION" />
+          <NavigationProperty Name="USUARIO" Relationship="Model.ROL_OPER_USU___FK" FromRole="ROL_OPERACION" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="RUBRO">
+          <Key>
+            <PropertyRef Name="ID_RUBRO" />
+          </Key>
+          <Property Name="ID_RUBRO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TRANSACCION_PRE" Relationship="Model.FK_TRANSACC_PRE_RUBRO" FromRole="RUBRO" ToRole="TRANSACCION_PRE" />
+          <NavigationProperty Name="TRANSACCION_REAL" Relationship="Model.FK_TRANSACC_REAL_RUBRO" FromRole="RUBRO" ToRole="TRANSACCION_REAL" />
+        </EntityType>
+        <EntityType Name="TRANSACCION_PRE">
+          <Key>
+            <PropertyRef Name="ID_TRANS_PRE" />
+          </Key>
+          <Property Name="ID_TRANS_PRE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RUB_ID" Type="Int32" Nullable="false" />
+          <Property Name="TIPO" Type="Boolean" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="SUBTOTAL" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="IMPUESTO" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="TOTAL" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="USU_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="REG_DET_PRESUPUESTOS" Relationship="Model.REG_DET_PRES_TRA_P___FK" FromRole="TRANSACCION_PRE" ToRole="REG_DET_PRESUPUESTOS" />
+          <NavigationProperty Name="RUBRO" Relationship="Model.FK_TRANSACC_PRE_RUBRO" FromRole="TRANSACCION_PRE" ToRole="RUBRO" />
+          <NavigationProperty Name="USUARIO" Relationship="Model.TRANSA_PRE_USUARIO__FK" FromRole="TRANSACCION_PRE" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="TRANSACCION_REAL">
+          <Key>
+            <PropertyRef Name="ID_TRANS_REAL" />
+          </Key>
+          <Property Name="ID_TRANS_REAL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RUB_ID" Type="Int32" Nullable="false" />
+          <Property Name="FACTURA_ID" Type="Int32" Nullable="false" />
+          <Property Name="TIPO" Type="Boolean" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="SUBTOTAL" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="IMPUESTO" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="TOTAL" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="USU_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FACTURA" Relationship="Model.FK_FACTURA_RELATIONS_TRANSACC" FromRole="TRANSACCION_REAL" ToRole="FACTURA" />
+          <NavigationProperty Name="FACTURA1" Relationship="Model.FK_TRANSACC_RELATIONS_FACTURA" FromRole="TRANSACCION_REAL" ToRole="FACTURA" />
+          <NavigationProperty Name="REG_DET_LIBROS" Relationship="Model.FK_REG_DET__RELATIONS_TRANSACC" FromRole="TRANSACCION_REAL" ToRole="REG_DET_LIBROS" />
+          <NavigationProperty Name="RUBRO" Relationship="Model.FK_TRANSACC_REAL_RUBRO" FromRole="TRANSACCION_REAL" ToRole="RUBRO" />
+          <NavigationProperty Name="USUARIO" Relationship="Model.TRANSA_REAL_USUARIO__FK" FromRole="TRANSACCION_REAL" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ROL_ID" Type="Byte" Nullable="false" />
+          <Property Name="NOMBRE_USUARIO" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDO" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CEDULA" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RUC" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECCION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LIBRO_CONTABLE" Relationship="Model.FK_LIBRO_CO_RELATIONS_USUARIO" FromRole="USUARIO" ToRole="LIBRO_CONTABLE" />
+          <NavigationProperty Name="PRESUPUESTO" Relationship="Model.FK_PRESUPUE_RELATIONS_USUARIO" FromRole="USUARIO" ToRole="PRESUPUESTO" />
+          <NavigationProperty Name="ROL" Relationship="Model.FK_USUARIO_RELATIONS_ROL" FromRole="USUARIO" ToRole="ROL" />
+          <NavigationProperty Name="ROL_OPERACION" Relationship="Model.ROL_OPER_USU___FK" FromRole="USUARIO" ToRole="ROL_OPERACION" />
+          <NavigationProperty Name="TRANSACCION_PRE" Relationship="Model.TRANSA_PRE_USUARIO__FK" FromRole="USUARIO" ToRole="TRANSACCION_PRE" />
+          <NavigationProperty Name="TRANSACCION_REAL" Relationship="Model.TRANSA_REAL_USUARIO__FK" FromRole="USUARIO" ToRole="TRANSACCION_REAL" />
+        </EntityType>
+        <Association Name="FK_ESTADO_R_RELATIONS_LIBRO_CO">
+          <End Type="Model.LIBRO_CONTABLE" Role="LIBRO_CONTABLE" Multiplicity="0..1" />
+          <End Type="Model.ESTADO_RESULTADO" Role="ESTADO_RESULTADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LIBRO_CONTABLE">
+              <PropertyRef Name="ID_LIB_CONTABLE" />
+            </Principal>
+            <Dependent Role="ESTADO_RESULTADO">
+              <PropertyRef Name="LIB_CONTABLE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FACTURA_RELATIONS_TRANSACC">
+          <End Type="Model.TRANSACCION_REAL" Role="TRANSACCION_REAL" Multiplicity="1" />
+          <End Type="Model.FACTURA" Role="FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSACCION_REAL">
+              <PropertyRef Name="ID_TRANS_REAL" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="TRANS_REAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACC_RELATIONS_FACTURA">
+          <End Type="Model.FACTURA" Role="FACTURA" Multiplicity="1" />
+          <End Type="Model.TRANSACCION_REAL" Role="TRANSACCION_REAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURA">
+              <PropertyRef Name="ID_FACTURA" />
+            </Principal>
+            <Dependent Role="TRANSACCION_REAL">
+              <PropertyRef Name="FACTURA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LIBRO_CO_RELATIONS_USUARIO">
+          <End Type="Model.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="Model.LIBRO_CONTABLE" Role="LIBRO_CONTABLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="LIBRO_CONTABLE">
+              <PropertyRef Name="USU_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REG_DET__RELATIONS_LIBRO_CO">
+          <End Type="Model.LIBRO_CONTABLE" Role="LIBRO_CONTABLE" Multiplicity="1" />
+          <End Type="Model.REG_DET_LIBROS" Role="REG_DET_LIBROS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LIBRO_CONTABLE">
+              <PropertyRef Name="ID_LIB_CONTABLE" />
+            </Principal>
+            <Dependent Role="REG_DET_LIBROS">
+              <PropertyRef Name="LIB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OPER_MODULO_ID_MODULO_FK">
+          <End Type="Model.MODULO" Role="MODULO" Multiplicity="1" />
+          <End Type="Model.OPERACION" Role="OPERACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MODULO">
+              <PropertyRef Name="ID_MODULO" />
+            </Principal>
+            <Dependent Role="OPERACION">
+              <PropertyRef Name="MODULO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ROL_OPE_OPERA__FK">
+          <End Type="Model.OPERACION" Role="OPERACION" Multiplicity="1" />
+          <End Type="Model.ROL_OPERACION" Role="ROL_OPERACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERACION">
+              <PropertyRef Name="ID_OPERACION" />
+            </Principal>
+            <Dependent Role="ROL_OPERACION">
+              <PropertyRef Name="OPERACION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRESUPUE_RELATIONS_USUARIO">
+          <End Type="Model.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="Model.PRESUPUESTO" Role="PRESUPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="PRESUPUESTO">
+              <PropertyRef Name="USU_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REG_DET__RELATIONS_PRESUPUE">
+          <End Type="Model.PRESUPUESTO" Role="PRESUPUESTO" Multiplicity="1" />
+          <End Type="Model.REG_DET_PRESUPUESTOS" Role="REG_DET_PRESUPUESTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESUPUESTO">
+              <PropertyRef Name="ID_PRESUPUESTO" />
+            </Principal>
+            <Dependent Role="REG_DET_PRESUPUESTOS">
+              <PropertyRef Name="PRE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REG_DET__RELATIONS_TRANSACC">
+          <End Type="Model.TRANSACCION_REAL" Role="TRANSACCION_REAL" Multiplicity="1" />
+          <End Type="Model.REG_DET_LIBROS" Role="REG_DET_LIBROS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSACCION_REAL">
+              <PropertyRef Name="ID_TRANS_REAL" />
+            </Principal>
+            <Dependent Role="REG_DET_LIBROS">
+              <PropertyRef Name="TRA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="REG_DET_PRES_TRA_P___FK">
+          <End Type="Model.TRANSACCION_PRE" Role="TRANSACCION_PRE" Multiplicity="1" />
+          <End Type="Model.REG_DET_PRESUPUESTOS" Role="REG_DET_PRESUPUESTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSACCION_PRE">
+              <PropertyRef Name="ID_TRANS_PRE" />
+            </Principal>
+            <Dependent Role="REG_DET_PRESUPUESTOS">
+              <PropertyRef Name="TRA_PRE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_RELATIONS_ROL">
+          <End Type="Model.ROL" Role="ROL" Multiplicity="1" />
+          <End Type="Model.USUARIO" Role="USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="ID_ROL" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ROL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ROL_OPER_USU___FK">
+          <End Type="Model.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="Model.ROL_OPERACION" Role="ROL_OPERACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="ROL_OPERACION">
+              <PropertyRef Name="USUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACC_PRE_RUBRO">
+          <End Type="Model.RUBRO" Role="RUBRO" Multiplicity="1" />
+          <End Type="Model.TRANSACCION_PRE" Role="TRANSACCION_PRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RUBRO">
+              <PropertyRef Name="ID_RUBRO" />
+            </Principal>
+            <Dependent Role="TRANSACCION_PRE">
+              <PropertyRef Name="RUB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSACC_REAL_RUBRO">
+          <End Type="Model.RUBRO" Role="RUBRO" Multiplicity="1" />
+          <End Type="Model.TRANSACCION_REAL" Role="TRANSACCION_REAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RUBRO">
+              <PropertyRef Name="ID_RUBRO" />
+            </Principal>
+            <Dependent Role="TRANSACCION_REAL">
+              <PropertyRef Name="RUB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TRANSA_PRE_USUARIO__FK">
+          <End Type="Model.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="Model.TRANSACCION_PRE" Role="TRANSACCION_PRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="TRANSACCION_PRE">
+              <PropertyRef Name="USU_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TRANSA_REAL_USUARIO__FK">
+          <End Type="Model.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="Model.TRANSACCION_REAL" Role="TRANSACCION_REAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="TRANSACCION_REAL">
+              <PropertyRef Name="USU_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="ESTADO_RESULTADO">
+            <EntityTypeMapping TypeName="Model.ESTADO_RESULTADO">
+              <MappingFragment StoreEntitySet="ESTADO_RESULTADO">
+                <ScalarProperty Name="FECHA_FIN" ColumnName="FECHA_FIN" />
+                <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+                <ScalarProperty Name="UTILIDAD_EJERCICIO" ColumnName="UTILIDAD_EJERCICIO" />
+                <ScalarProperty Name="UTILIDAD_ANTES_IMP" ColumnName="UTILIDAD_ANTES_IMP" />
+                <ScalarProperty Name="UTILIDAD_BRUTA" ColumnName="UTILIDAD_BRUTA" />
+                <ScalarProperty Name="LIB_CONTABLE_ID" ColumnName="LIB_CONTABLE_ID" />
+                <ScalarProperty Name="ID_EST_RES" ColumnName="ID_EST_RES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACTURA">
+            <EntityTypeMapping TypeName="Model.FACTURA">
+              <MappingFragment StoreEntitySet="FACTURA">
+                <ScalarProperty Name="FOTO" ColumnName="FOTO" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="TRANS_REAL_ID" ColumnName="TRANS_REAL_ID" />
+                <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LIBRO_CONTABLE">
+            <EntityTypeMapping TypeName="Model.LIBRO_CONTABLE">
+              <MappingFragment StoreEntitySet="LIBRO_CONTABLE">
+                <ScalarProperty Name="TOTAL_GASTOS" ColumnName="TOTAL_GASTOS" />
+                <ScalarProperty Name="TOTAL_INGRESOS" ColumnName="TOTAL_INGRESOS" />
+                <ScalarProperty Name="FECHA_FIN" ColumnName="FECHA_FIN" />
+                <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+                <ScalarProperty Name="USU_ID" ColumnName="USU_ID" />
+                <ScalarProperty Name="ID_LIB_CONTABLE" ColumnName="ID_LIB_CONTABLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MODULO">
+            <EntityTypeMapping TypeName="Model.MODULO">
+              <MappingFragment StoreEntitySet="MODULO">
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_MODULO" ColumnName="ID_MODULO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OPERACION">
+            <EntityTypeMapping TypeName="Model.OPERACION">
+              <MappingFragment StoreEntitySet="OPERACION">
+                <ScalarProperty Name="MODULO_ID" ColumnName="MODULO_ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_OPERACION" ColumnName="ID_OPERACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRESUPUESTO">
+            <EntityTypeMapping TypeName="Model.PRESUPUESTO">
+              <MappingFragment StoreEntitySet="PRESUPUESTO">
+                <ScalarProperty Name="TOTAL_GASTOS" ColumnName="TOTAL_GASTOS" />
+                <ScalarProperty Name="VALOR_PRE" ColumnName="VALOR_PRE" />
+                <ScalarProperty Name="FECHA_FIN" ColumnName="FECHA_FIN" />
+                <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+                <ScalarProperty Name="USU_ID" ColumnName="USU_ID" />
+                <ScalarProperty Name="ID_PRESUPUESTO" ColumnName="ID_PRESUPUESTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REG_DET_LIBROS">
+            <EntityTypeMapping TypeName="Model.REG_DET_LIBROS">
+              <MappingFragment StoreEntitySet="REG_DET_LIBROS">
+                <ScalarProperty Name="LIB_ID" ColumnName="LIB_ID" />
+                <ScalarProperty Name="TRA_ID" ColumnName="TRA_ID" />
+                <ScalarProperty Name="ID_REG_DET_LIB" ColumnName="ID_REG_DET_LIB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REG_DET_PRESUPUESTOS">
+            <EntityTypeMapping TypeName="Model.REG_DET_PRESUPUESTOS">
+              <MappingFragment StoreEntitySet="REG_DET_PRESUPUESTOS">
+                <ScalarProperty Name="TRA_PRE_ID" ColumnName="TRA_PRE_ID" />
+                <ScalarProperty Name="PRE_ID" ColumnName="PRE_ID" />
+                <ScalarProperty Name="ID_REG_DET_PRE" ColumnName="ID_REG_DET_PRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROL">
+            <EntityTypeMapping TypeName="Model.ROL">
+              <MappingFragment StoreEntitySet="ROL">
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROL_OPERACION">
+            <EntityTypeMapping TypeName="Model.ROL_OPERACION">
+              <MappingFragment StoreEntitySet="ROL_OPERACION">
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="OPERACION_ID" ColumnName="OPERACION_ID" />
+                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+                <ScalarProperty Name="ID_ROL_OPERACION" ColumnName="ID_ROL_OPERACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RUBRO">
+            <EntityTypeMapping TypeName="Model.RUBRO">
+              <MappingFragment StoreEntitySet="RUBRO">
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_RUBRO" ColumnName="ID_RUBRO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSACCION_PRE">
+            <EntityTypeMapping TypeName="Model.TRANSACCION_PRE">
+              <MappingFragment StoreEntitySet="TRANSACCION_PRE">
+                <ScalarProperty Name="USU_ID" ColumnName="USU_ID" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="IMPUESTO" ColumnName="IMPUESTO" />
+                <ScalarProperty Name="SUBTOTAL" ColumnName="SUBTOTAL" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="RUB_ID" ColumnName="RUB_ID" />
+                <ScalarProperty Name="ID_TRANS_PRE" ColumnName="ID_TRANS_PRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSACCION_REAL">
+            <EntityTypeMapping TypeName="Model.TRANSACCION_REAL">
+              <MappingFragment StoreEntitySet="TRANSACCION_REAL">
+                <ScalarProperty Name="USU_ID" ColumnName="USU_ID" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="IMPUESTO" ColumnName="IMPUESTO" />
+                <ScalarProperty Name="SUBTOTAL" ColumnName="SUBTOTAL" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="FACTURA_ID" ColumnName="FACTURA_ID" />
+                <ScalarProperty Name="RUB_ID" ColumnName="RUB_ID" />
+                <ScalarProperty Name="ID_TRANS_REAL" ColumnName="ID_TRANS_REAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="Model.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="RUC" ColumnName="RUC" />
+                <ScalarProperty Name="CEDULA" ColumnName="CEDULA" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="NOMBRE_USUARIO" ColumnName="NOMBRE_USUARIO" />
+                <ScalarProperty Name="ROL_ID" ColumnName="ROL_ID" />
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="119bd8c648054f4aa519ebfe5127e035" Name="Diagram1" ZoomLevel="65">
+        <EntityTypeShape EntityType="Model.ESTADO_RESULTADO" Width="1.5" PointX="7.5" PointY="22.875" />
+        <EntityTypeShape EntityType="Model.FACTURA" Width="1.5" PointX="10.5" PointY="10.625" />
+        <EntityTypeShape EntityType="Model.LIBRO_CONTABLE" Width="1.5" PointX="5.25" PointY="20" />
+        <EntityTypeShape EntityType="Model.MODULO" Width="1.5" PointX="0.75" PointY="15" />
+        <EntityTypeShape EntityType="Model.OPERACION" Width="1.5" PointX="3" PointY="14.75" />
+        <EntityTypeShape EntityType="Model.PRESUPUESTO" Width="1.5" PointX="5.25" PointY="23.5" />
+        <EntityTypeShape EntityType="Model.REG_DET_LIBROS" Width="1.5" PointX="10.5" PointY="15.375" />
+        <EntityTypeShape EntityType="Model.REG_DET_PRESUPUESTOS" Width="1.5" PointX="7.5" PointY="15.125" />
+        <EntityTypeShape EntityType="Model.ROL" Width="1.5" PointX="0.75" PointY="11" />
+        <EntityTypeShape EntityType="Model.ROL_OPERACION" Width="1.5" PointX="5.25" PointY="10.625" />
+        <EntityTypeShape EntityType="Model.RUBRO" Width="1.5" PointX="3" PointY="6.875" />
+        <EntityTypeShape EntityType="Model.TRANSACCION_PRE" Width="1.5" PointX="5.25" PointY="6.125" />
+        <EntityTypeShape EntityType="Model.TRANSACCION_REAL" Width="1.5" PointX="8.25" PointY="9.875" />
+        <EntityTypeShape EntityType="Model.USUARIO" Width="1.5" PointX="3" PointY="9.625" />
+        <AssociationConnector Association="Model.FK_ESTADO_R_RELATIONS_LIBRO_CO" />
+        <AssociationConnector Association="Model.FK_FACTURA_RELATIONS_TRANSACC" />
+        <AssociationConnector Association="Model.FK_TRANSACC_RELATIONS_FACTURA" />
+        <AssociationConnector Association="Model.FK_LIBRO_CO_RELATIONS_USUARIO" />
+        <AssociationConnector Association="Model.FK_REG_DET__RELATIONS_LIBRO_CO" />
+        <AssociationConnector Association="Model.OPER_MODULO_ID_MODULO_FK" />
+        <AssociationConnector Association="Model.ROL_OPE_OPERA__FK" />
+        <AssociationConnector Association="Model.FK_PRESUPUE_RELATIONS_USUARIO" />
+        <AssociationConnector Association="Model.FK_REG_DET__RELATIONS_PRESUPUE" />
+        <AssociationConnector Association="Model.FK_REG_DET__RELATIONS_TRANSACC" />
+        <AssociationConnector Association="Model.REG_DET_PRES_TRA_P___FK" />
+        <AssociationConnector Association="Model.FK_USUARIO_RELATIONS_ROL" />
+        <AssociationConnector Association="Model.ROL_OPER_USU___FK" />
+        <AssociationConnector Association="Model.FK_TRANSACC_PRE_RUBRO" />
+        <AssociationConnector Association="Model.FK_TRANSACC_REAL_RUBRO" />
+        <AssociationConnector Association="Model.TRANSA_PRE_USUARIO__FK" />
+        <AssociationConnector Association="Model.TRANSA_REAL_USUARIO__FK" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

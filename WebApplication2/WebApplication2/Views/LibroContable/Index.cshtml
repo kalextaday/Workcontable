@@ -1,0 +1,64 @@
+﻿@model List<WebApplication2.Models.TableViewModels.LBTableViewModel>
+@{
+    ViewBag.Title = "Libros Contables";
+
+    int i = 1;
+
+    if (ViewBag.rol == 1)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else if (ViewBag.rol == 2)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<br>
+<br>
+<br>
+<br>
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/LibroContable/Add")'" value="Nuevo" />
+    </div>
+</div>
+<br />
+
+<div>
+    <div class="col.lg.12">
+        <table class="table table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Fecha de inicio</th>
+                <th>Fecha de finalizacion</th>
+                <th>Total de Ingresos</th>
+                <th>Total de Gastos</th>
+                <th></th>
+            </tr>
+            @foreach (var oElemento in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@oElemento.fecha_inicio</td>
+                    <td>@oElemento.fecha_fin</td>
+                    <td>@oElemento.total_ingresos</td>
+                    <td>@oElemento.total_gastos</td>
+                    <td>
+                        <input type="button" value="Editar" class="btn btn-info" onclick="document.location.href='@Url.Content("~/LibroContable/Edit/"+oElemento.id_lib_contable)'" />
+                        <input type="button" value="Transacciones" class="btn btn-info" onclick="document.location.href='@Url.Content("~/LibroContable/Record/"+oElemento.id_lib_contable)'" />
+                        <input type="button" value="Eliminar" class="btn btn-danger" onclick="jsDelete(@oElemento.id_lib_contable)" />
+                    </td>
+                </tr>
+                i++;
+            }
+        </table>
+    </div>
+</div>
+

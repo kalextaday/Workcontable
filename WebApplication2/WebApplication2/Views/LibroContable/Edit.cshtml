@@ -1,0 +1,58 @@
+﻿@model WebApplication2.Models.ViewModels.EditLBViewModel
+@{
+    ViewBag.Title = "Modificar Libro Contable";
+
+    if (ViewBag.rol == 1)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else if (ViewBag.rol == 2)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Edit", "LibroContable", FormMethod.Post, new { role = "form", @class = "" }))
+        {
+            @Html.HiddenFor(d => d.id_lib_contable) //se va el id en la peticion
+            @Html.AntiForgeryToken() /*atributo de seguridad helper, no hagan peticiones de fuera*/
+
+            @Html.ValidationMessage("error", new { @class = "text-danger" })
+
+            @Html.LabelFor(d => d.fecha_inicio)
+            @Html.Label("*")
+            @Html.TextBoxFor(d => d.fecha_inicio, new { @type = "date", @class = "form-control", @required = "required" })
+
+            @Html.LabelFor(d => d.fecha_fin)
+            @Html.Label("*")
+            @Html.TextBoxFor(d => d.fecha_fin, new { @type = "date", @class = "form-control" })
+
+            @Html.LabelFor(d => d.total_ingresos)
+            @Html.Label("*")
+            @Html.TextBoxFor(d => d.total_ingresos, new { @class = "form-control" })
+
+            @Html.LabelFor(d => d.total_gastos)
+            @Html.Label("*")
+            @Html.TextBoxFor(d => d.total_gastos, new { @class = "form-control" })
+
+
+            <div style="text-align:right;">
+                <input type="submit" class="btn btn-success" value="Guardar" />
+            </div>
+        }
+    </div>
+</div>
+

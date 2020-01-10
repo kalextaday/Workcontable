@@ -1,0 +1,89 @@
+﻿@model List<WebApplication2.Models.TableViewModels.UsuarioTableViewModel>
+@{
+    ViewBag.Title = "Index";
+
+    if (ViewBag.rol == 1)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else if (ViewBag.rol == 2)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<br>
+<br>
+<br>
+<br>
+<h2>Usuarios</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/Usuario/Add")'" value="Nuevo"/>
+    </div>
+</div>
+<br />
+
+<div>
+    <div class="col.lg.12">
+        <table class="table table-bordered">
+            <tr>
+                <th>Username</th>
+                <th>Rol</th>
+                <th>Permisos</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Cedula</th>
+                <th>Ruc</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+            @foreach (var oElemento in Model)
+            {
+                <tr>
+                    <td>@oElemento.nombre_usuario</td>
+                    <td>@oElemento.rol_id</td>
+                    <td>
+                        <input type="button" value="Ver" class="btn btn-secondary" onclick="document.location.href='@Url.Content("~/RolOperacion/Index/"+oElemento.id_usuario)'" />
+                    </td>
+                    <td>@oElemento.nombre</td>
+                    <td>@oElemento.apellido</td>
+                    <td>@oElemento.cedula</td>
+                    <td>@oElemento.ruc</td>
+                    <td>@oElemento.direccion</td>
+                    <td>@oElemento.telefono</td>
+                    <td>@oElemento.email</td>
+                    <td>
+                        <input type="button" value="Editar" class="btn btn-info" onclick="document.location.href='@Url.Content("~/Usuario/Edit/"+oElemento.id_usuario)'" />
+                        <input type="button" value="Eliminar" class="btn btn-danger" onclick="jsDelete(@oElemento.id_usuario)" />
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <a href="@Url.Action("Export","Usuario")"> Exportar a excel </a>
+    </div>
+</div>
+
+<script>
+    function jsDelete(id) {
+        if(confirm("Seguro que desea eliminarlo?")){
+            url = "@Url.Content("~/Usuario/Delete")" + "/"+id;
+            $.post(url, function (data) {
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/Usuario/")";
+                } else {
+                    alert("ocurrio un error");
+                }
+            });
+        }
+    }
+</script>
+

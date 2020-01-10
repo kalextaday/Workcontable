@@ -1,0 +1,68 @@
+﻿@model List<WebApplication2.Models.TableViewModels.PresuTableViewModel>
+@{
+    ViewBag.Title = "Index";
+
+    int i = 1;
+
+    if (ViewBag.rol == 1)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else if (ViewBag.rol == 2)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<br>
+<br>
+<br>
+<br>
+<h2>Presupuestos</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/Presupuesto/Add")'" value="Nuevo" />
+    </div>
+</div>
+<br />
+
+<div>
+    <div class="col.lg.12">
+        <table class="table table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Fecha de inicio</th>
+                <th>Fecha de finalizacion</th>
+                <th>Valor Presupuestario</th>
+                <th>Total de Gastos</th>
+                <th></th>
+            </tr>
+            @foreach (var oElemento in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@oElemento.fecha_inicio</td>
+                    <td>@oElemento.fecha_fin</td>
+                    <td>@oElemento.valor_pre</td>
+                    <td>@oElemento.total_gastos</td>
+                    <td>
+                        <input type="button" value="Editar" class="btn btn-info" onclick="document.location.href='@Url.Content("~/Presupuesto/Edit/"+oElemento.id_presupuesto)'" />
+                        <input type="button" value="Transacciones" class="btn btn-info" onclick="document.location.href='@Url.Content("~/Presupuesto/Record/"+oElemento.id_presupuesto)'" />
+                        <input type="button" value="Eliminar" class="btn btn-danger" onclick="jsDelete(@oElemento.id_presupuesto)" />
+                    </td>
+                </tr>
+                i++;
+            }
+        </table>
+
+        <a href="@Url.Action("Export","Presupuesto")"> Exportar a excel </a>
+    </div>
+</div>
+
+
+
