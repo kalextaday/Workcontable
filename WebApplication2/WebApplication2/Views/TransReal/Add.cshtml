@@ -1,0 +1,61 @@
+﻿@model WebApplication2.Models.ViewModels.TransRealViewModel
+@{
+    ViewBag.Title = "Agregar Transaccion";
+    string sidLB = ViewBag.id_lb + "";
+    int idLB = ViewBag.id_lb;
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<h2>@ViewBag.Title al libro @ViewBag.id_lb</h2>
+<h4>Todos los campos con * deben ser rellenados</h4>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Add", "TransReal", FormMethod.Post, new { role = "form", @class = "" }))
+        {
+
+            @Html.AntiForgeryToken() /*atributo de seguridad helper, no hagan peticiones de fuera*/
+
+            @Html.ValidationMessage("error", new { @class = "text-danger" })
+
+
+            @Html.LabelFor(d => d.lib_id)
+            @Html.Label("*")
+            //@Html.TextBoxFor(d => d.usu_id, @sidP)<br />
+            @Html.TextBoxFor(d => d.lib_id, new { @Value = @sidLB, @class = "form-control" })<br />
+
+
+            @Html.LabelFor(d => d.tipo)
+            @Html.Label("*")
+            @Html.DropDownListFor(d => d.tipo, (List<SelectListItem>)ViewBag.opc_tipo, new { @class = "form-control", @required = "required" })<br />
+
+            @Html.LabelFor(d => d.rub_id)
+            @Html.Label("*")
+            @Html.DropDownListFor(d => d.rub_id, (List<SelectListItem>)ViewBag.opc_rubro, new { @class = "form-control", @required = "required" })<br />
+
+            @Html.LabelFor(d => d.fecha)
+            @Html.Label("*")
+            @Html.TextBoxFor(d => d.fecha, new { @type = "date", @class = "form-control", @required = "required" })
+
+            @Html.LabelFor(d => d.subtotal)
+            @Html.Label("*")
+            @Html.TextBoxFor(d => d.subtotal, new { @class = "form-control", @required = "required" })
+
+            @Html.LabelFor(d => d.impuesto)
+            @Html.Label("*")
+            @Html.TextBoxFor(d => d.impuesto, new { @class = "form-control", @required = "required" })
+
+            @Html.LabelFor(d => d.total)
+            @Html.Label("*")
+            @Html.TextBoxFor(d => d.total, new { @class = "form-control", @required = "required" })
+
+            <div style="text-align:right;">
+                <input type="submit" class="btn btn-success" value="Guardar" />
+            </div>
+        }
+    </div>
+</div>

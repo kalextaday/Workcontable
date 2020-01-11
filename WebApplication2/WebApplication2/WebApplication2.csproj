@@ -196,6 +196,7 @@
     <Compile Include="Controllers\PresupuestoController.cs" />
     <Compile Include="Controllers\RolOperacionController.cs" />
     <Compile Include="Controllers\TransPresuController.cs" />
+    <Compile Include="Controllers\TransRealController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Filters\AuthorizeUser.cs" />
     <Compile Include="Filters\Encryption.cs" />
@@ -273,6 +274,7 @@
     <Compile Include="Models\ViewModels\PresupuestoViewModel.cs" />
     <Compile Include="Models\ViewModels\RolOperacionViewModel.cs" />
     <Compile Include="Models\ViewModels\TransPreViewModel.cs" />
+    <Compile Include="Models\ViewModels\TransRealViewModel.cs" />
     <Compile Include="Models\ViewModels\UsuarioViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -353,6 +355,7 @@
     <Content Include="Views\LibroContable\Add.cshtml" />
     <Content Include="Views\LibroContable\Edit.cshtml" />
     <Content Include="Views\LibroContable\Record.cshtml" />
+    <Content Include="Views\TransReal\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
