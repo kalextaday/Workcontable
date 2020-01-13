@@ -1,6 +1,6 @@
 ﻿@model List<WebApplication2.Models.TableViewModels.UsuarioTableViewModel>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tabla Usuarios";
 
     if (ViewBag.rol == 1)
     {
@@ -24,7 +24,8 @@
     <h1 class="h3 mb-2 text-gray-800">Usuarios</h1>
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/Usuario/Add")'" value="Nuevo" />
+        
+        <a href="@Url.Action("Add", "Usuario")" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Nuevo User</a>
 
         <div align="right">
             <a href="@Url.Action("Export","Usuario")" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Exportar a excel</a>
@@ -87,8 +88,19 @@
                                 <td>@oElemento.telefono</td>
                                 <td>@oElemento.email</td>
                                 <td>
-                                    <input type="button" value="Editar" class="btn btn-info" onclick="document.location.href='@Url.Content("~/Usuario/Edit/"+oElemento.id_usuario)'" />
-                                    <input type="button" value="Eliminar" class="btn btn-danger" onclick="jsDelete(@oElemento.id_usuario)" />
+                                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                        <a href="@Url.Action("Edit", "Usuario",new { id = oElemento.id_usuario })" class="btn btn-warning btn-circle">
+                                            <i class="fas fa-fw fa-user-edit"></i>
+                                        </a>
+                                        <p>
+                                            &nbsp;&nbsp;
+                                        </p>
+                                        <div align="right">
+                                            <a href="javascript:jsDelete(@oElemento.id_usuario);" class="btn btn-danger btn-circle">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         }

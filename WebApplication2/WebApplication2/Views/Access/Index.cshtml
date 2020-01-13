@@ -57,7 +57,7 @@
             $.post(url, parametros, function (data) {
                 //si es uno es exitosa
                 if (data == "1") {
-                    document.location.href = "@Url.Content("~/Home/Index")";
+                    document.location.href = "@Url.Action("Index", "Home")";
                 } else {
                     alert(data)
                 }
