@@ -26,7 +26,6 @@ namespace WebApplication2.Models
         }
     
         public virtual DbSet<ESTADO_RESULTADO> ESTADO_RESULTADO { get; set; }
-        public virtual DbSet<FACTURA> FACTURA { get; set; }
         public virtual DbSet<LIBRO_CONTABLE> LIBRO_CONTABLE { get; set; }
         public virtual DbSet<MODULO> MODULO { get; set; }
         public virtual DbSet<OPERACION> OPERACION { get; set; }
@@ -39,5 +38,6 @@ namespace WebApplication2.Models
         public virtual DbSet<TRANSACCION_PRE> TRANSACCION_PRE { get; set; }
         public virtual DbSet<TRANSACCION_REAL> TRANSACCION_REAL { get; set; }
         public virtual DbSet<USUARIO> USUARIO { get; set; }
+        public virtual DbSet<FACTURA> FACTURA { get; set; }
     }
 }

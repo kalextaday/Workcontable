@@ -17,7 +17,6 @@ namespace WebApplication2.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TRANSACCION_REAL()
         {
-            this.FACTURA = new HashSet<FACTURA>();
             this.REG_DET_LIBROS = new HashSet<REG_DET_LIBROS>();
         }
     
@@ -32,11 +31,9 @@ namespace WebApplication2.Models
         public int USU_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FACTURA> FACTURA { get; set; }
-        public virtual FACTURA FACTURA1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REG_DET_LIBROS> REG_DET_LIBROS { get; set; }
         public virtual RUBRO RUBRO { get; set; }
         public virtual USUARIO USUARIO { get; set; }
+        public virtual FACTURA FACTURA { get; set; }
     }
 }

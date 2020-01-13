@@ -81,7 +81,7 @@ namespace WebApplication2.Controllers
                     oTraReal.IMPUESTO = model.impuesto;
                     oTraReal.TOTAL = model.total;
                     oTraReal.USU_ID = sesion_Usuario.ID_USUARIO;
-                    oTraReal.FACTURA_ID = 0;
+                    oTraReal.FACTURA_ID = 1;
 
                     db.TRANSACCION_REAL.Add(oTraReal);
                     db.SaveChanges();

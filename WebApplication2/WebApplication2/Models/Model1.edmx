@@ -22,9 +22,8 @@
             <PropertyRef Name="ID_FACTURA" />
           </Key>
           <Property Name="ID_FACTURA" Type="number" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TRANS_REAL_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="NUMERO" Type="varchar2" MaxLength="50" />
-          <Property Name="FOTO" Type="blob" />
+          <Property Name="NUMERO" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="FOTO" Type="blob" Nullable="false" />
         </EntityType>
         <EntityType Name="LIBRO_CONTABLE">
           <Key>
@@ -154,18 +153,6 @@
             </Principal>
             <Dependent Role="ESTADO_RESULTADO">
               <PropertyRef Name="LIB_CONTABLE_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FACTURA_RELATIONS_TRANSACC">
-          <End Role="TRANSACCION_REAL" Type="Self.TRANSACCION_REAL" Multiplicity="1" />
-          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TRANSACCION_REAL">
-              <PropertyRef Name="ID_TRANS_REAL" />
-            </Principal>
-            <Dependent Role="FACTURA">
-              <PropertyRef Name="TRANS_REAL_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -368,10 +355,6 @@
             <End Role="LIBRO_CONTABLE" EntitySet="LIBRO_CONTABLE" />
             <End Role="ESTADO_RESULTADO" EntitySet="ESTADO_RESULTADO" />
           </AssociationSet>
-          <AssociationSet Name="FK_FACTURA_RELATIONS_TRANSACC" Association="Self.FK_FACTURA_RELATIONS_TRANSACC">
-            <End Role="TRANSACCION_REAL" EntitySet="TRANSACCION_REAL" />
-            <End Role="FACTURA" EntitySet="FACTURA" />
-          </AssociationSet>
           <AssociationSet Name="FK_LIBRO_CO_RELATIONS_USUARIO" Association="Self.FK_LIBRO_CO_RELATIONS_USUARIO">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="LIBRO_CONTABLE" EntitySet="LIBRO_CONTABLE" />
@@ -439,7 +422,6 @@
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ESTADO_RESULTADO" EntityType="Model.ESTADO_RESULTADO" />
-          <EntitySet Name="FACTURA" EntityType="Model.FACTURA" />
           <EntitySet Name="LIBRO_CONTABLE" EntityType="Model.LIBRO_CONTABLE" />
           <EntitySet Name="MODULO" EntityType="Model.MODULO" />
           <EntitySet Name="OPERACION" EntityType="Model.OPERACION" />
@@ -455,14 +437,6 @@
           <AssociationSet Name="FK_ESTADO_R_RELATIONS_LIBRO_CO" Association="Model.FK_ESTADO_R_RELATIONS_LIBRO_CO">
             <End Role="LIBRO_CONTABLE" EntitySet="LIBRO_CONTABLE" />
             <End Role="ESTADO_RESULTADO" EntitySet="ESTADO_RESULTADO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FACTURA_RELATIONS_TRANSACC" Association="Model.FK_FACTURA_RELATIONS_TRANSACC">
-            <End Role="TRANSACCION_REAL" EntitySet="TRANSACCION_REAL" />
-            <End Role="FACTURA" EntitySet="FACTURA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TRANSACC_RELATIONS_FACTURA" Association="Model.FK_TRANSACC_RELATIONS_FACTURA">
-            <End Role="FACTURA" EntitySet="FACTURA" />
-            <End Role="TRANSACCION_REAL" EntitySet="TRANSACCION_REAL" />
           </AssociationSet>
           <AssociationSet Name="FK_LIBRO_CO_RELATIONS_USUARIO" Association="Model.FK_LIBRO_CO_RELATIONS_USUARIO">
             <End Role="USUARIO" EntitySet="USUARIO" />
@@ -520,6 +494,11 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="TRANSACCION_REAL" EntitySet="TRANSACCION_REAL" />
           </AssociationSet>
+          <EntitySet Name="FACTURA" EntityType="Model.FACTURA" />
+          <AssociationSet Name="FK_TRANSACC_RELATIONS_FACTURA" Association="Model.FK_TRANSACC_RELATIONS_FACTURA">
+            <End Role="FACTURA" EntitySet="FACTURA" />
+            <End Role="TRANSACCION_REAL" EntitySet="TRANSACCION_REAL" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ESTADO_RESULTADO">
           <Key>
@@ -533,17 +512,6 @@
           <Property Name="FECHA_INICIO" Type="DateTime" Precision="6" />
           <Property Name="FECHA_FIN" Type="DateTime" Precision="6" />
           <NavigationProperty Name="LIBRO_CONTABLE" Relationship="Model.FK_ESTADO_R_RELATIONS_LIBRO_CO" FromRole="ESTADO_RESULTADO" ToRole="LIBRO_CONTABLE" />
-        </EntityType>
-        <EntityType Name="FACTURA">
-          <Key>
-            <PropertyRef Name="ID_FACTURA" />
-          </Key>
-          <Property Name="ID_FACTURA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TRANS_REAL_ID" Type="Int32" Nullable="false" />
-          <Property Name="NUMERO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="TRANSACCION_REAL" Relationship="Model.FK_FACTURA_RELATIONS_TRANSACC" FromRole="FACTURA" ToRole="TRANSACCION_REAL" />
-          <NavigationProperty Name="TRANSACCION_REAL1" Relationship="Model.FK_TRANSACC_RELATIONS_FACTURA" FromRole="FACTURA" ToRole="TRANSACCION_REAL" />
         </EntityType>
         <EntityType Name="LIBRO_CONTABLE">
           <Key>
@@ -667,11 +635,10 @@
           <Property Name="IMPUESTO" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
           <Property Name="TOTAL" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
           <Property Name="USU_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="FACTURA" Relationship="Model.FK_FACTURA_RELATIONS_TRANSACC" FromRole="TRANSACCION_REAL" ToRole="FACTURA" />
-          <NavigationProperty Name="FACTURA1" Relationship="Model.FK_TRANSACC_RELATIONS_FACTURA" FromRole="TRANSACCION_REAL" ToRole="FACTURA" />
           <NavigationProperty Name="REG_DET_LIBROS" Relationship="Model.FK_REG_DET__RELATIONS_TRANSACC" FromRole="TRANSACCION_REAL" ToRole="REG_DET_LIBROS" />
           <NavigationProperty Name="RUBRO" Relationship="Model.FK_TRANSACC_REAL_RUBRO" FromRole="TRANSACCION_REAL" ToRole="RUBRO" />
           <NavigationProperty Name="USUARIO" Relationship="Model.TRANSA_REAL_USUARIO__FK" FromRole="TRANSACCION_REAL" ToRole="USUARIO" />
+          <NavigationProperty Name="FACTURA" Relationship="Model.FK_TRANSACC_RELATIONS_FACTURA" FromRole="TRANSACCION_REAL" ToRole="FACTURA" />
         </EntityType>
         <EntityType Name="USUARIO">
           <Key>
@@ -704,30 +671,6 @@
             </Principal>
             <Dependent Role="ESTADO_RESULTADO">
               <PropertyRef Name="LIB_CONTABLE_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FACTURA_RELATIONS_TRANSACC">
-          <End Type="Model.TRANSACCION_REAL" Role="TRANSACCION_REAL" Multiplicity="1" />
-          <End Type="Model.FACTURA" Role="FACTURA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TRANSACCION_REAL">
-              <PropertyRef Name="ID_TRANS_REAL" />
-            </Principal>
-            <Dependent Role="FACTURA">
-              <PropertyRef Name="TRANS_REAL_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TRANSACC_RELATIONS_FACTURA">
-          <End Type="Model.FACTURA" Role="FACTURA" Multiplicity="1" />
-          <End Type="Model.TRANSACCION_REAL" Role="TRANSACCION_REAL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FACTURA">
-              <PropertyRef Name="ID_FACTURA" />
-            </Principal>
-            <Dependent Role="TRANSACCION_REAL">
-              <PropertyRef Name="FACTURA_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -899,6 +842,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="ID_FACTURA" />
+          </Key>
+          <Property Name="ID_FACTURA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NUMERO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FOTO" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="TRANSACCION_REAL" Relationship="Model.FK_TRANSACC_RELATIONS_FACTURA" FromRole="FACTURA" ToRole="TRANSACCION_REAL" />
+        </EntityType>
+        <Association Name="FK_TRANSACC_RELATIONS_FACTURA">
+          <End Type="Model.FACTURA" Role="FACTURA" Multiplicity="1" />
+          <End Type="Model.TRANSACCION_REAL" Role="TRANSACCION_REAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURA">
+              <PropertyRef Name="ID_FACTURA" />
+            </Principal>
+            <Dependent Role="TRANSACCION_REAL">
+              <PropertyRef Name="FACTURA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -915,16 +879,6 @@
                 <ScalarProperty Name="UTILIDAD_BRUTA" ColumnName="UTILIDAD_BRUTA" />
                 <ScalarProperty Name="LIB_CONTABLE_ID" ColumnName="LIB_CONTABLE_ID" />
                 <ScalarProperty Name="ID_EST_RES" ColumnName="ID_EST_RES" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FACTURA">
-            <EntityTypeMapping TypeName="Model.FACTURA">
-              <MappingFragment StoreEntitySet="FACTURA">
-                <ScalarProperty Name="FOTO" ColumnName="FOTO" />
-                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
-                <ScalarProperty Name="TRANS_REAL_ID" ColumnName="TRANS_REAL_ID" />
-                <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1056,6 +1010,15 @@
                 <ScalarProperty Name="NOMBRE_USUARIO" ColumnName="NOMBRE_USUARIO" />
                 <ScalarProperty Name="ROL_ID" ColumnName="ROL_ID" />
                 <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACTURA">
+            <EntityTypeMapping TypeName="Model.FACTURA">
+              <MappingFragment StoreEntitySet="FACTURA">
+                <ScalarProperty Name="FOTO" ColumnName="FOTO" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -11,17 +11,25 @@ using WebApplication2.Filters;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using System.Data;
 using OfficeOpenXml;
+using NLog;
 
 namespace WebApplication2.Controllers
 {
     public class UsuarioController : Controller
     {
+        private readonly ILogger _logger= LogManager.GetCurrentClassLogger();
+
         USUARIO sesion_Usuario = null;  
 
         // GET: Usuario
         //[AuthorizeUser(new int[1] {3})] //dar autorizacion al usuario de este action result
         public ActionResult Index()
         {
+            //LOGGER//
+            _logger.Info("Comenzo el metodo index");
+            ////
+
+
             sesion_Usuario = (USUARIO)Session["USUARIO"];
 
             ViewBag.rol = sesion_Usuario.ROL_ID;

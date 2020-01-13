@@ -181,7 +181,7 @@ namespace WebApplication2.Controllers
             {
                 foreach (var oDetalle in lst_det_lb)
                 {
-                    var oTransaccion = db.TRANSACCION_PRE.Find(oDetalle.tra_id);
+                    var oTransaccion = db.TRANSACCION_REAL.Find(oDetalle.tra_id);
 
                     oDetalle.rub_id = oTransaccion.RUB_ID;
                     using (var db2 = new Entities())
@@ -204,7 +204,7 @@ namespace WebApplication2.Controllers
                     oDetalle.subtotal = oTransaccion.SUBTOTAL;
                     oDetalle.impuesto = oTransaccion.IMPUESTO;
                     oDetalle.total = oTransaccion.TOTAL;
-                    oDetalle.factura_id = 0;
+                    oDetalle.factura_id = oTransaccion.FACTURA_ID;
                 }
             }
 

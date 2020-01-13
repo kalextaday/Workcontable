@@ -17,16 +17,14 @@ namespace WebApplication2.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FACTURA()
         {
-            this.TRANSACCION_REAL1 = new HashSet<TRANSACCION_REAL>();
+            this.TRANSACCION_REAL = new HashSet<TRANSACCION_REAL>();
         }
     
         public int ID_FACTURA { get; set; }
-        public int TRANS_REAL_ID { get; set; }
         public string NUMERO { get; set; }
         public byte[] FOTO { get; set; }
     
-        public virtual TRANSACCION_REAL TRANSACCION_REAL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TRANSACCION_REAL> TRANSACCION_REAL1 { get; set; }
+        public virtual ICollection<TRANSACCION_REAL> TRANSACCION_REAL { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace WebApplication2
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 //url: "{controller}/{action}/{id}/{desc}",
-                defaults: new { controller = "Access", action = "Index", id = UrlParameter.Optional
+                defaults: new { controller = "General", action = "Index", id = UrlParameter.Optional
                 }
             );
         }

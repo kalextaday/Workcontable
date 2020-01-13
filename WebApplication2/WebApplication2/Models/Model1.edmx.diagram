@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="119bd8c648054f4aa519ebfe5127e035" Name="Diagram1" ZoomLevel="65">
         <EntityTypeShape EntityType="Model.ESTADO_RESULTADO" Width="1.5" PointX="7.5" PointY="22.875" />
-        <EntityTypeShape EntityType="Model.FACTURA" Width="1.5" PointX="10.5" PointY="10.625" />
         <EntityTypeShape EntityType="Model.LIBRO_CONTABLE" Width="1.5" PointX="5.25" PointY="20" />
         <EntityTypeShape EntityType="Model.MODULO" Width="1.5" PointX="0.75" PointY="15" />
         <EntityTypeShape EntityType="Model.OPERACION" Width="1.5" PointX="3" PointY="14.75" />
@@ -20,8 +19,6 @@
         <EntityTypeShape EntityType="Model.TRANSACCION_REAL" Width="1.5" PointX="8.25" PointY="9.875" />
         <EntityTypeShape EntityType="Model.USUARIO" Width="1.5" PointX="3" PointY="9.625" />
         <AssociationConnector Association="Model.FK_ESTADO_R_RELATIONS_LIBRO_CO" />
-        <AssociationConnector Association="Model.FK_FACTURA_RELATIONS_TRANSACC" />
-        <AssociationConnector Association="Model.FK_TRANSACC_RELATIONS_FACTURA" />
         <AssociationConnector Association="Model.FK_LIBRO_CO_RELATIONS_USUARIO" />
         <AssociationConnector Association="Model.FK_REG_DET__RELATIONS_LIBRO_CO" />
         <AssociationConnector Association="Model.OPER_MODULO_ID_MODULO_FK" />
@@ -36,6 +33,8 @@
         <AssociationConnector Association="Model.FK_TRANSACC_REAL_RUBRO" />
         <AssociationConnector Association="Model.TRANSA_PRE_USUARIO__FK" />
         <AssociationConnector Association="Model.TRANSA_REAL_USUARIO__FK" />
+        <EntityTypeShape EntityType="Model.FACTURA" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="Model.FK_TRANSACC_RELATIONS_FACTURA" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,13 +12,13 @@ namespace WebApplication2.Filters
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var oUser = (USUARIO)HttpContext.Current.Session["USUARIO"];
+            var oUser = (USUARIO)HttpContext.Current.Session["USUARIO"]; //Obtengo los datos de la sesion
 
             //evalua si el objeto es nulo
             if (oUser == null)
             {
-                //evalua si es diferente al access controller
-                if(filterContext.Controller is AccessController ==false){
+                //evalua el acceso al controller
+                if (filterContext.Controller is AccessController == false){
                     filterContext.HttpContext.Response.Redirect("~/Access/Index");
                 }
             }
