@@ -202,6 +202,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LibroContableController.cs" />
     <Compile Include="Controllers\PresupuestoController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\RolOperacionController.cs" />
     <Compile Include="Controllers\TransPresuController.cs" />
     <Compile Include="Controllers\TransRealController.cs" />
@@ -297,6 +298,7 @@
     <Content Include="Assets\Login\js\demo\datatables-demo.js" />
     <Content Include="Assets\Login\js\sb-admin-2.js" />
     <Content Include="Assets\Login\js\sb-admin-2.min.js" />
+    <Content Include="Assets\Login\own_img\login.jpg" />
     <Content Include="Assets\Login\vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="Assets\Login\vendor\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="Assets\Login\vendor\bootstrap\js\bootstrap.js" />
@@ -2197,9 +2199,14 @@
     <Content Include="Views\TransReal\Add.cshtml" />
     <Content Include="Views\General\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutEmpty.cshtml" />
+    <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutRegister.cshtml" />
+    <Content Include="Views\Shared\_LayoutCustom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Logs\" />
+    <Folder Include="Assets\ForgotPassword\" />
+    <Folder Include="Assets\Register\" />
     <Folder Include="Views\Cerrar\" />
   </ItemGroup>
   <ItemGroup>

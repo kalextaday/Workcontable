@@ -127,7 +127,7 @@ namespace WebApplication2.Controllers
         {
             sesion_Usuario = (USUARIO)Session["USUARIO"];
 
-            //ViewBag.rol = sesion_Usuario.ROL_ID;
+            ViewBag.rol = sesion_Usuario.ROL_ID;
 
             //******* CARGA DE ROLES EN LA VISTA ********
             List<RolTableViewModel> roles = null;
@@ -334,42 +334,6 @@ namespace WebApplication2.Controllers
             return Content("1");
         }
 
-
-        
-
-
-        //*** EXPORTAR ***
-        // GET: Tabla
-        /*
-        [HttpPost]
-        public FileResult Export()
-        {
-            
-            Entities entities = new Entities();
-            DataTable dt = new DataTable("Grid");
-            dt.Columns.AddRange(new DataColumn[4] { new DataColumn("CustomerId"),
-                                            new DataColumn("ContactName"),
-                                            new DataColumn("City"),
-                                            new DataColumn("Country") });
-
-            var customers = from customer in entities.Customers.Take(10)
-                            select customer;
-
-            foreach (var customer in customers)
-            {
-                dt.Rows.Add(customer.CustomerID, customer.ContactName, customer.City, customer.Country);
-            }
-
-            using (XLWorkbook wb = new XLWorkbook())
-            {
-                wb.Worksheets.Add(dt);
-                using (MemoryStream stream = new MemoryStream())
-                {
-                    wb.SaveAs(stream);
-                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Grid.xlsx");
-                }
-            }
-            */
     }
 
 }

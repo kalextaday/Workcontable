@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Login</title>
+    <title>Register</title>
 
     <!-- Custom fonts for this template-->
     <link href="~/Assets/Login/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -17,33 +17,23 @@
 
     <!-- Custom styles for this template-->
     <link href="~/Assets/Login/css/sb-admin-2.min.css" rel="stylesheet">
-
 </head>
 
-<body class="bg-gradient-info">
+<body class="bg-gradient-success">
     <div class="container">
 
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
-
-            <div class="col-xl-10 col-lg-12 col-md-9">
-
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block" style="background-image:url(../../Assets/Login/own_img/login.jpg);"></div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    @RenderBody()
-                                </div>
-                            </div>
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            @RenderBody()
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
 
     </div>
@@ -57,8 +47,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src="Assets/Login/js/sb-admin-2.min.js"></script>
-
     @RenderSection("scripts", required: false)
 </body>
 
 </html>
+

@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutRegister.cshtml";
+}
+
+<div class="text-center">
+    <h1 class="h4 text-gray-900 mb-4">Crea una Cuenta!</h1>
+</div>
+<form class="user">
+    <div class="form-group row">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nombres">
+        </div>
+        <div class="col-sm-6">
+            <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Apellidos">
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Direccion email">
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+        </div>
+        <div class="col-sm-6">
+            <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Confirmar Password">
+        </div>
+    </div>
+    <a href="login.html" class="btn btn-primary btn-user btn-block">
+        Registrar Cuenta
+    </a>
+    <hr>
+    <a href="index.html" class="btn btn-google btn-user btn-block">
+        <i class="fab fa-google fa-fw"></i> Registrar con Google
+    </a>
+    <a href="index.html" class="btn btn-facebook btn-user btn-block">
+        <i class="fab fa-facebook-f fa-fw"></i> Registrar con Facebook
+    </a>
+</form>
+<hr>
+<div class="text-center">
+    <a class="small" href="@Url.Action("ForgotPass", "Access")">¿Se te olvidó tu contraseña?</a>
+</div>
+<div class="text-center">
+    <a class="small" href="@Url.Action("Index", "Access")">¿Ya tienes una cuenta? ¡Inicia sesión!</a>
+</div>
+

@@ -1,9 +1,11 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+
     
     if (ViewBag.rol == 1)
     {
-        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+        //Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+        Layout = "~/Views/Shared/_LayoutCustom.cshtml";
     }
     else if (ViewBag.rol == 2)
     {
@@ -13,6 +15,7 @@
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
+
 }
 
 <div class="jumbotron">
@@ -21,7 +24,7 @@
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
-<div class="row">
+<div class="row" style="padding-left:2%;">
     <div class="col-md-4">
         <h2>Getting started</h2>
         <p>

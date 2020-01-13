@@ -4,7 +4,8 @@
 
     if (ViewBag.rol == 1)
     {
-        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+        //Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+        Layout = "~/Views/Shared/_LayoutCustom.cshtml";
     }
     else if (ViewBag.rol == 2)
     {
@@ -16,61 +17,92 @@
     }
 }
 
-<br>
-<br>
-<br>
-<br>
-<h2>Usuarios</h2>
 
-<div class="row">
-    <div class="col-md-12">
-        <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/Usuario/Add")'" value="Nuevo"/>
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Usuarios</h1>
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/Usuario/Add")'" value="Nuevo" />
+
+        <div align="right">
+            <a href="@Url.Action("Export","Usuario")" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Exportar a excel</a>
+        </div>
     </div>
-</div>
-<br />
 
-<div>
-    <div class="col.lg.12">
-        <table class="table table-bordered">
-            <tr>
-                <th>Username</th>
-                <th>Rol</th>
-                <th>Permisos</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Cedula</th>
-                <th>Ruc</th>
-                <th>Direccion</th>
-                <th>Telefono</th>
-                <th>Email</th>
-                <th></th>
-            </tr>
-            @foreach (var oElemento in Model)
-            {
-                <tr>
-                    <td>@oElemento.nombre_usuario</td>
-                    <td>@oElemento.rol_id</td>
-                    <td>
-                        <input type="button" value="Ver" class="btn btn-secondary" onclick="document.location.href='@Url.Content("~/RolOperacion/Index/"+oElemento.id_usuario)'" />
-                    </td>
-                    <td>@oElemento.nombre</td>
-                    <td>@oElemento.apellido</td>
-                    <td>@oElemento.cedula</td>
-                    <td>@oElemento.ruc</td>
-                    <td>@oElemento.direccion</td>
-                    <td>@oElemento.telefono</td>
-                    <td>@oElemento.email</td>
-                    <td>
-                        <input type="button" value="Editar" class="btn btn-info" onclick="document.location.href='@Url.Content("~/Usuario/Edit/"+oElemento.id_usuario)'" />
-                        <input type="button" value="Eliminar" class="btn btn-danger" onclick="jsDelete(@oElemento.id_usuario)" />
-                    </td>
-                </tr>
-            }
-        </table>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
 
-        <a href="@Url.Action("Export","Usuario")"> Exportar a excel </a>
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Registro de Usuarios</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Rol</th>
+                            <th>Permisos</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Cedula</th>
+                            <th>Ruc</th>
+                            <th>Direccion</th>
+                            <th>Telefono</th>
+                            <th>Email</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Username</th>
+                            <th>Rol</th>
+                            <th>Permisos</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Cedula</th>
+                            <th>Ruc</th>
+                            <th>Direccion</th>
+                            <th>Telefono</th>
+                            <th>Email</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var oElemento in Model)
+                        {
+                            <tr>
+                                <td>@oElemento.nombre_usuario</td>
+                                <td>@oElemento.rol_id</td>
+                                <td>
+                                    <input type="button" value="Ver" class="btn btn-secondary" onclick="document.location.href='@Url.Content("~/RolOperacion/Index/"+oElemento.id_usuario)'" />
+                                </td>
+                                <td>@oElemento.nombre</td>
+                                <td>@oElemento.apellido</td>
+                                <td>@oElemento.cedula</td>
+                                <td>@oElemento.ruc</td>
+                                <td>@oElemento.direccion</td>
+                                <td>@oElemento.telefono</td>
+                                <td>@oElemento.email</td>
+                                <td>
+                                    <input type="button" value="Editar" class="btn btn-info" onclick="document.location.href='@Url.Content("~/Usuario/Edit/"+oElemento.id_usuario)'" />
+                                    <input type="button" value="Eliminar" class="btn btn-danger" onclick="jsDelete(@oElemento.id_usuario)" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
 </div>
+
+
+
+
 
 <script>
     function jsDelete(id) {
