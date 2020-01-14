@@ -1,62 +1,71 @@
 ﻿@model WebApplication2.Models.ViewModels.TransPreViewModel
 @{
     ViewBag.Title = "Agregar Transaccion";
+    Layout = "~/Views/Shared/_LayoutCustom.cshtml";
+
+
     string sidP = ViewBag.id_presu+"";
     int idP = ViewBag.id_presu;
 }
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<h2>@ViewBag.Title al presupuesto @ViewBag.id_presu</h2>
-<h4>Todos los campos con * deben ser rellenados</h4>
+<div class="container-fluid">
 
-<div class="row">
-    <div class="col-md-12">
-        @using (Html.BeginForm("Add", "TransPresu", FormMethod.Post, new { role = "form", @class = "" }))
-        {
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">@ViewBag.Title al presupuesto @ViewBag.id_presu</h1><br />
 
-            @Html.AntiForgeryToken() /*atributo de seguridad helper, no hagan peticiones de fuera*/
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
 
-            @Html.ValidationMessage("error", new { @class = "text-danger" })
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Todos los campos con * deben ser rellenados</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                @using (Html.BeginForm("Add", "TransPresu", FormMethod.Post, new { role = "form", @class = "" }))
+                {
+                    @Html.AntiForgeryToken() /*atributo de seguridad helper, no hagan peticiones de fuera*/
 
-
-            @Html.LabelFor(d => d.pre_id)
-            @Html.Label("*")
-            //@Html.TextBoxFor(d => d.usu_id, @sidP)<br />
-            @Html.TextBoxFor(d => d.pre_id, new { @Value = @sidP , @class = "form-control" })<br />
+                    @Html.ValidationMessage("error", new { @class = "text-danger" })
 
 
-            @Html.LabelFor(d => d.tipo)
-            @Html.Label("*")
-            @Html.DropDownListFor(d => d.tipo, (List<SelectListItem>)ViewBag.opc_tipo, new { @class = "form-control", @required = "required" })<br />
+                    @Html.LabelFor(d => d.pre_id)
+                    @Html.Label("*")
+                    //@Html.TextBoxFor(d => d.usu_id, @sidP)<br />
+                    @Html.TextBoxFor(d => d.pre_id, new { @Value = @sidP, @class = "form-control" })<br />
 
-            @Html.LabelFor(d => d.rub_id)
-            @Html.Label("*")
-            @Html.DropDownListFor(d => d.rub_id, (List<SelectListItem>)ViewBag.opc_rubro, new { @class = "form-control", @required = "required" })<br />
 
-            @Html.LabelFor(d => d.fecha)
-            @Html.Label("*")
-            @Html.TextBoxFor(d => d.fecha, new { @type = "date", @class = "form-control", @required = "required" })
+                    @Html.LabelFor(d => d.tipo)
+                    @Html.Label("*")
+                    @Html.DropDownListFor(d => d.tipo, (List<SelectListItem>)ViewBag.opc_tipo, new { @class = "form-control", @required = "required" })<br />
 
-            @Html.LabelFor(d => d.subtotal)
-            @Html.Label("*")
-            @Html.TextBoxFor(d => d.subtotal, new { @class = "form-control", @required = "required" })
+                    @Html.LabelFor(d => d.rub_id)
+                    @Html.Label("*")
+                    @Html.DropDownListFor(d => d.rub_id, (List<SelectListItem>)ViewBag.opc_rubro, new { @class = "form-control", @required = "required" })<br />
 
-            @Html.LabelFor(d => d.impuesto)
-            @Html.Label("*")
-            @Html.TextBoxFor(d => d.impuesto, new { @class = "form-control", @required = "required" })
+                    @Html.LabelFor(d => d.fecha)
+                    @Html.Label("*")
+                    @Html.TextBoxFor(d => d.fecha, new { @type = "date", @class = "form-control", @required = "required" })
 
-            @Html.LabelFor(d => d.total)
-            @Html.Label("*")
-            @Html.TextBoxFor(d => d.total, new { @class = "form-control", @required = "required" })
+                    @Html.LabelFor(d => d.subtotal)
+                    @Html.Label("*")
+                    @Html.TextBoxFor(d => d.subtotal, new { @class = "form-control", @required = "required" })
 
-            <div style="text-align:right;">
-                <input type="submit" class="btn btn-success" value="Guardar" />
+                    @Html.LabelFor(d => d.impuesto)
+                    @Html.Label("*")
+                    @Html.TextBoxFor(d => d.impuesto, new { @class = "form-control", @required = "required" })
+
+                    @Html.LabelFor(d => d.total)
+                    @Html.Label("*")
+                    @Html.TextBoxFor(d => d.total, new { @class = "form-control", @required = "required" })
+
+
+                    <br />
+                    <div align="right">
+                        <input type="submit" class="btn btn-success" value="Guardar" />
+                    </div>
+                }
             </div>
-        }
+        </div>
     </div>
-</div>
 
+</div>

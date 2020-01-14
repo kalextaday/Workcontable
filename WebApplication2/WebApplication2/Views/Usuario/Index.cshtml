@@ -1,6 +1,6 @@
 ﻿@model List<WebApplication2.Models.TableViewModels.UsuarioTableViewModel>
 @{
-    ViewBag.Title = "Tabla Usuarios";
+    ViewBag.Title = "Usuarios";
 
     if (ViewBag.rol == 1)
     {
@@ -21,11 +21,11 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Usuarios</h1>
+    <h1 class="h3 mb-2 text-gray-800">@ViewBag.Title</h1>
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         
-        <a href="@Url.Action("Add", "Usuario")" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Nuevo User</a>
+        <a href="@Url.Action("Add", "Usuario")" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Nuevo</a>
 
         <div align="right">
             <a href="@Url.Action("Export","Usuario")" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Exportar a excel</a>
@@ -78,7 +78,9 @@
                                 <td>@oElemento.nombre_usuario</td>
                                 <td>@oElemento.rol_id</td>
                                 <td>
-                                    <input type="button" value="Ver" class="btn btn-secondary" onclick="document.location.href='@Url.Content("~/RolOperacion/Index/"+oElemento.id_usuario)'" />
+                                    <a href="@Url.Action("Index", "RolOperacion",new { id = oElemento.id_usuario })" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        <i class="fas fa-fw fa-eye"></i>
+                                    </a>
                                 </td>
                                 <td>@oElemento.nombre</td>
                                 <td>@oElemento.apellido</td>
@@ -92,9 +94,7 @@
                                         <a href="@Url.Action("Edit", "Usuario",new { id = oElemento.id_usuario })" class="btn btn-warning btn-circle">
                                             <i class="fas fa-fw fa-user-edit"></i>
                                         </a>
-                                        <p>
-                                            &nbsp;&nbsp;
-                                        </p>
+                                        &nbsp;&nbsp;
                                         <div align="right">
                                             <a href="javascript:jsDelete(@oElemento.id_usuario);" class="btn btn-danger btn-circle">
                                                 <i class="fas fa-trash"></i>
@@ -109,7 +109,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 
@@ -130,4 +129,3 @@
         }
     }
 </script>
-

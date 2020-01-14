@@ -1,12 +1,10 @@
 ﻿@model WebApplication2.Models.ViewModels.UsuarioViewModel
 @{
     ViewBag.Title = "Agregar Usuario";
-
-    Layout = "~/Views/Shared/_LayoutCustom.cshtml";
-    /*
+    
     if (ViewBag.rol == 1)
     {
-        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+        //Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
         Layout = "~/Views/Shared/_LayoutCustom.cshtml";
     }
     else if (ViewBag.rol == 2)
@@ -16,7 +14,7 @@
     else
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
-    }*/
+    }
 }
 
 
@@ -25,13 +23,12 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">@ViewBag.Title</h1><br />
-    <h4>Todos los campos con * deben ser rellenados</h4>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
 
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Registro de Usuarios</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Todos los campos con * deben ser rellenados</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -93,7 +90,8 @@
                     @Html.Label("*")
                     @Html.TextBoxFor(d => d.email, new { @type = "email", @class = "form-control", @required = "required" })
 
-                    <div style="text-align:right;">
+                    <br />
+                    <div align="right">
                         <input type="submit" class="btn btn-success" value="Guardar" />
                     </div>
                 }
@@ -102,4 +100,3 @@
     </div>
 
 </div>
-

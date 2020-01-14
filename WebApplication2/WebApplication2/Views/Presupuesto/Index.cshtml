@@ -1,12 +1,13 @@
 ﻿@model List<WebApplication2.Models.TableViewModels.PresuTableViewModel>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Presupuestos";
 
     int i = 1;
 
     if (ViewBag.rol == 1)
     {
-        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+        //Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+        Layout = "~/Views/Shared/_LayoutCustom.cshtml";
     }
     else if (ViewBag.rol == 2)
     {
@@ -18,51 +19,78 @@
     }
 }
 
-<br>
-<br>
-<br>
-<br>
-<h2>Presupuestos</h2>
+<div class="container-fluid">
 
-<div class="row">
-    <div class="col-md-12">
-        <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/Presupuesto/Add")'" value="Nuevo" />
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">@ViewBag.Title</h1>
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+        <a href="@Url.Action("Add", "Presupuesto")" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Nuevo</a>
+
+
+        <div align="right">
+            <a href="@Url.Action("Export","Presupuesto")" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Exportar a excel</a>
+        </div>
     </div>
-</div>
-<br />
 
-<div>
-    <div class="col.lg.12">
-        <table class="table table-bordered">
-            <tr>
-                <th>#</th>
-                <th>Fecha de inicio</th>
-                <th>Fecha de finalizacion</th>
-                <th>Valor Presupuestario</th>
-                <th>Total de Gastos</th>
-                <th></th>
-            </tr>
-            @foreach (var oElemento in Model)
-            {
-                <tr>
-                    <td>@i</td>
-                    <td>@oElemento.fecha_inicio</td>
-                    <td>@oElemento.fecha_fin</td>
-                    <td>@oElemento.valor_pre</td>
-                    <td>@oElemento.total_gastos</td>
-                    <td>
-                        <input type="button" value="Editar" class="btn btn-info" onclick="document.location.href='@Url.Content("~/Presupuesto/Edit/"+oElemento.id_presupuesto)'" />
-                        <input type="button" value="Transacciones" class="btn btn-info" onclick="document.location.href='@Url.Content("~/Presupuesto/Record/"+oElemento.id_presupuesto)'" />
-                        <input type="button" value="Eliminar" class="btn btn-danger" onclick="jsDelete(@oElemento.id_presupuesto)" />
-                    </td>
-                </tr>
-                i++;
-            }
-        </table>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
 
-        <a href="@Url.Action("Export","Presupuesto")"> Exportar a excel </a>
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Registro de Presupuestos</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Fecha de inicio</th>
+                            <th>Fecha de finalizacion</th>
+                            <th>Valor Presupuestario</th>
+                            <th>Total de Gastos</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Fecha de inicio</th>
+                            <th>Fecha de finalizacion</th>
+                            <th>Valor Presupuestario</th>
+                            <th>Total de Gastos</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var oElemento in Model)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td>@oElemento.fecha_inicio</td>
+                                <td>@oElemento.fecha_fin</td>
+                                <td>@oElemento.valor_pre</td>
+                                <td>@oElemento.total_gastos</td>
+                                <td>
+                                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                        <input type="button" value="Transacciones" class="btn btn-info" onclick="document.location.href='@Url.Content("~/Presupuesto/Record/"+oElemento.id_presupuesto)'" />
+                                        <a href="@Url.Action("Edit", "Presupuesto",new { id = oElemento.id_presupuesto })" class="btn btn-warning btn-circle">
+                                            <i class="fas fa-fw fa-edit"></i>
+                                        </a>
+
+                                        <a href="javascript:jsDelete(@oElemento.id_presupuesto);" class="btn btn-danger btn-circle">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
 </div>
-
-
-

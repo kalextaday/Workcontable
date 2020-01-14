@@ -4,7 +4,8 @@
 
     if (ViewBag.rol == 1)
     {
-        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+        //Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+        Layout = "~/Views/Shared/_LayoutCustom.cshtml";
     }
     else if (ViewBag.rol == 2)
     {
@@ -16,79 +17,85 @@
     }
 }
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<h2>@ViewBag.Title</h2>
+<div class="container-fluid">
 
-<div class="row">
-    <div class="col-md-12">
-        @using (Html.BeginForm("Edit", "Usuario", FormMethod.Post, new { role = "form", @class = "" }))
-        {
-            @Html.HiddenFor(d=>d.id_usuario) //se va el id en la peticion
-            @Html.AntiForgeryToken() /*atributo de seguridad helper, no hagan peticiones de fuera*/
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">@ViewBag.Title</h1><br />
 
-            @Html.ValidationMessage("error", new { @class = "text-danger" })
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
 
-            @Html.LabelFor(d => d.nombre_usuario)
-            @Html.Label("*")
-            @Html.TextBoxFor(d => d.nombre_usuario, new { @class = "form-control", @required = "required" })
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Id Usuario: @Model.id_usuario </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                @using (Html.BeginForm("Edit", "Usuario", FormMethod.Post, new { role = "form", @class = "" }))
+                {
+                    @Html.HiddenFor(d => d.id_usuario) //se va el id en la peticion
+                                            @Html.AntiForgeryToken() /*atributo de seguridad helper, no hagan peticiones de fuera*/
 
-       
-            @Html.LabelFor(d => d.password)
-            @Html.Label("*")
-            @Html.PasswordFor(d => d.password, new { @class = "form-control"})
+                    @Html.ValidationMessage("error", new { @class = "text-danger" })
 
-            @Html.LabelFor(d => d.confirmPassword)
-            @Html.Label("*")
-            @Html.PasswordFor(d => d.confirmPassword, new { @class = "form-control"})
-            @Html.ValidationMessage("confirmPassword", new { @class = "text-danger" }) <br />
+                    @Html.LabelFor(d => d.nombre_usuario)
+                    @Html.Label("*")
+                    @Html.TextBoxFor(d => d.nombre_usuario, new { @class = "form-control", @required = "required" })
 
-            @Html.LabelFor(d => d.rol_id)
-            @Html.Label("*")
-            @Html.DropDownListFor(d => d.rol_id, (List<SelectListItem>)ViewBag.opc_rol, new { @class = "form-control" })<br />
-            
-            @*
-            @Html.LabelFor(d => d.per_id)
-            @Html.Label("*")
-            @Html.DropDownListFor(d => d.per_id, new SelectList(new string[] {
-            "Lectura y Escritura", "Escritura", "Lectura", "Ninguno" }, "Lectura y Escritura"), htmlAttributes: new { @class = "form-control", @required = "required" })<br />
-            *@
 
-            @Html.LabelFor(d => d.nombre)
-            @Html.Label("*")
-            @Html.TextBoxFor(d => d.nombre, new { @class = "form-control", @required = "required" })
+                    @Html.LabelFor(d => d.password)
+                    @Html.Label("*")
+                    @Html.PasswordFor(d => d.password, new { @class = "form-control" })
 
-            @Html.LabelFor(d => d.apellido)
-            @Html.Label("*")
-            @Html.TextBoxFor(d => d.apellido, new { @class = "form-control", @required = "required" })
+                    @Html.LabelFor(d => d.confirmPassword)
+                    @Html.Label("*")
+                    @Html.PasswordFor(d => d.confirmPassword, new { @class = "form-control" })
+                    @Html.ValidationMessage("confirmPassword", new { @class = "text-danger" }) <br />
 
-            @Html.LabelFor(d => d.cedula)
-            @Html.Label("*")
-            @Html.TextBoxFor(d => d.cedula, new { @class = "form-control", @required = "required" })
+                    @Html.LabelFor(d => d.rol_id)
+                    @Html.Label("*")
+                    @Html.DropDownListFor(d => d.rol_id, (List<SelectListItem>)ViewBag.opc_rol, new { @class = "form-control" })<br />
 
-            @Html.LabelFor(d => d.ruc)
-            @Html.Label("*")
-            @Html.TextBoxFor(d => d.ruc, new { @class = "form-control", @required = "required" })
+                    @*
+                        @Html.LabelFor(d => d.per_id)
+                        @Html.Label("*")
+                        @Html.DropDownListFor(d => d.per_id, new SelectList(new string[] {
+                        "Lectura y Escritura", "Escritura", "Lectura", "Ninguno" }, "Lectura y Escritura"), htmlAttributes: new { @class = "form-control", @required = "required" })<br />
+                    *@
 
-            @Html.LabelFor(d => d.direccion)
-            @Html.Label("*")
-            @Html.TextBoxFor(d => d.direccion, new { @class = "form-control", @required = "required" })
+                    @Html.LabelFor(d => d.nombre)
+                    @Html.Label("*")
+                    @Html.TextBoxFor(d => d.nombre, new { @class = "form-control", @required = "required" })
 
-            @Html.LabelFor(d => d.telefono)
-            @Html.Label("*")
-            @Html.TextBoxFor(d => d.telefono, new { @class = "form-control", @required = "required" })
+                    @Html.LabelFor(d => d.apellido)
+                    @Html.Label("*")
+                    @Html.TextBoxFor(d => d.apellido, new { @class = "form-control", @required = "required" })
 
-            @Html.LabelFor(d => d.email)
-            @Html.Label("*")
-            @Html.TextBoxFor(d => d.email, new { @type = "email", @class = "form-control", @required = "required" })
+                    @Html.LabelFor(d => d.cedula)
+                    @Html.Label("*")
+                    @Html.TextBoxFor(d => d.cedula, new { @class = "form-control", @required = "required" })
 
-            <div style="text-align:right;">
-                <input type="submit" class="btn btn-success" value="Guardar" />
+                    @Html.LabelFor(d => d.ruc)
+                    @Html.Label("*")
+                    @Html.TextBoxFor(d => d.ruc, new { @class = "form-control", @required = "required" })
+
+                    @Html.LabelFor(d => d.direccion)
+                    @Html.Label("*")
+                    @Html.TextBoxFor(d => d.direccion, new { @class = "form-control", @required = "required" })
+
+                    @Html.LabelFor(d => d.telefono)
+                    @Html.Label("*")
+                    @Html.TextBoxFor(d => d.telefono, new { @class = "form-control", @required = "required" })
+
+                    @Html.LabelFor(d => d.email)
+                    @Html.Label("*")
+                    @Html.TextBoxFor(d => d.email, new { @type = "email", @class = "form-control", @required = "required" })
+
+                    <div style="text-align:right;">
+                        <input type="submit" class="btn btn-success" value="Guardar" />
+                    </div>
+                }
             </div>
-        }
+        </div>
     </div>
-</div>
 
+</div>

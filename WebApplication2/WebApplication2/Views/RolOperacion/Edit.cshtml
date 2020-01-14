@@ -19,65 +19,90 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
     */
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    //Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutCustom.cshtml";
 }
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<h2>@ViewBag.Title</h2>
+<div class="container-fluid">
 
-<div>
-    <div>
-        <h3>Usuario Destino</h3>
-        @Html.DropDownList("usuario_destino", (List<SelectListItem>)ViewBag.opc_user, new { @class = "form-control",@id="id_usuario", @required = "required" })<br />
-        
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">@ViewBag.Title</h1>
+
+    <div class="d-sm-inline-flex align-items-center justify-content-between mb-4">
+        <h6>Usuario Destino:</h6>
+        @Html.DropDownList("usuario_destino", (List<SelectListItem>)ViewBag.opc_user, new { @class = "form-control", @id = "id_usuario", @required = "required" })<br />
+
     </div>
 
-    <div class="col-lg-12">
-        <table class="table table-bordered table-responsive">
-            <tr>
-                <th>Id Rol Operacion</th>
-                <th>Rol</th>
-                <th>Modulo</th>
-                <th>Operacion</th>
-                <th></th>
-            </tr>
-            @foreach (var oElemento in Model)
-            {
-                <tr>
-                    <td>@oElemento.id_rol_operacion</td>
-                    <td>@oElemento.rol_nombre</td>
-                    <td>@oElemento.modulo_nombre</td>
-                    @{
-                        if (@oElemento.operacion_nombre == "Agregar")
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tus Permisos:</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id Rol Operacion</th>
+                            <th>Rol</th>
+                            <th>Modulo</th>
+                            <th>Operacion</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Id Rol Operacion</th>
+                            <th>Rol</th>
+                            <th>Modulo</th>
+                            <th>Operacion</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var oElemento in Model)
                         {
-                            ViewBag.ctd = "success";
-                        }
-                        else if (@oElemento.operacion_nombre == "Editar")
-                        {
-                            ViewBag.ctd = "warning";
-                        }
-                        else if (@oElemento.operacion_nombre == "Ver")
-                        {
-                            ViewBag.ctd = "info";
-                        }
-                        else
-                        {
-                            ViewBag.ctd = "Danger";
-                        }
-                    }
-                    <td class=@ViewBag.ctd>@oElemento.operacion_nombre</td>
-                    <td>
-                        <input id="@oElemento.id_rol_operacion" type="button" value="Otorgar Permiso" class="btn btn-info" onclick="jsOtorgarPermiso(@oElemento.id_rol_operacion)" />
-                    </td>
-                </tr>
-             }
-        </table>
+                            <tr>
+                                <td>@oElemento.id_rol_operacion</td>
+                                <td>@oElemento.rol_nombre</td>
+                                <td>@oElemento.modulo_nombre</td>
+                                @{
+                                    if (@oElemento.operacion_nombre == "Agregar")
+                                    {
+                                        ViewBag.ctd = "success";
+                                    }
+                                    else if (@oElemento.operacion_nombre == "Editar")
+                                    {
+                                        ViewBag.ctd = "warning";
+                                    }
+                                    else if (@oElemento.operacion_nombre == "Ver")
+                                    {
+                                        ViewBag.ctd = "info";
+                                    }
+                                    else
+                                    {
+                                        ViewBag.ctd = "Danger";
+                                    }
+                                }
+                                <td class=@ViewBag.ctd>@oElemento.operacion_nombre</td>
+                                <td>
+                                    <a id="@oElemento.id_rol_operacion" href="javascript:jsOtorgarPermiso(@oElemento.id_rol_operacion);" class="btn btn-warning btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                        <span class="text">Otorgar Permiso</span>
+                                    </a>
+                                </td>
+                            </tr>
+                         }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <div id="result"></div>
+
 </div>
 
 

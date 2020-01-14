@@ -1,7 +1,7 @@
 ﻿@model List<WebApplication2.Models.TableViewModels.PermisoTableViewModel>
 @{
     ViewBag.Title = "Rol-Operaciones";
-    
+
     ViewBag.Rol = Model.FirstOrDefault().rol_nombre;
 
     /*
@@ -18,61 +18,84 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
     */
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    //Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutCustom.cshtml";
 }
 
-<br>
-<br>
-<br>
-<br>
 
-<div class="row">
-    <h3>Rol: @ViewBag.Rol</h3>
-</div>
-<br />
+<div class="container-fluid">
 
-<div>
-    <div class="col-lg-12">
-        <table class="table table-bordered table-responsive">
-            <tr>
-                <th>Id Rol Operacion</th>
-                <th>Rol</th>
-                <th>Modulo</th>
-                <th>Operacion</th>
-            </tr>
-            @foreach (var oElemento in Model)
-            {
-                <tr>
-                    <td>@oElemento.id_rol_operacion</td>
-                    <td>@oElemento.rol_nombre</td>
-                    <td>@oElemento.modulo_nombre</td>
-                    @{ 
-                        if (@oElemento.operacion_nombre=="Agregar")
-                        {
-                            ViewBag.ctd = "success";
-                        }else if (@oElemento.operacion_nombre == "Editar")
-                        {
-                            ViewBag.ctd = "warning";
-                        }
-                        else if (@oElemento.operacion_nombre == "Ver")
-                        {
-                            ViewBag.ctd = "info";
-                        }
-                        else
-                        {
-                            ViewBag.ctd = "Danger";
-                        }
-                    }
-                    <td class=@ViewBag.ctd>@oElemento.operacion_nombre</td>
-                </tr>
-            }
-        </table>
-    </div>
-    <div class="row">
-        <div class="col-md-12 style="text-align:right;">
-            <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/RolOperacion/Edit/"+ViewBag.id_usuario)'" value="Conceder Permisos" />
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Rol: @ViewBag.Rol</h1>
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+        <a href="@Url.Action("Edit", "RolOperacion",new { id = ViewBag.id_usuario })" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Conceder Permisos</a>
+
+        <div align="right">
+            <a href="@Url.Action("Export","Usuario")" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Exportar a excel</a>
         </div>
     </div>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tu Id: @ViewBag.id_usuario</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id Rol Operacion</th>
+                            <th>Rol</th>
+                            <th>Modulo</th>
+                            <th>Operacion</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Id Rol Operacion</th>
+                            <th>Rol</th>
+                            <th>Modulo</th>
+                            <th>Operacion</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var oElemento in Model)
+                        {
+                            <tr>
+                                <td>@oElemento.id_rol_operacion</td>
+                                <td>@oElemento.rol_nombre</td>
+                                <td>@oElemento.modulo_nombre</td>
+                                @{
+                                    if (@oElemento.operacion_nombre == "Agregar")
+                                    {
+                                        ViewBag.ctd = "success";
+                                    }
+                                    else if (@oElemento.operacion_nombre == "Editar")
+                                    {
+                                        ViewBag.ctd = "warning";
+                                    }
+                                    else if (@oElemento.operacion_nombre == "Ver")
+                                    {
+                                        ViewBag.ctd = "info";
+                                    }
+                                    else
+                                    {
+                                        ViewBag.ctd = "Danger";
+                                    }
+                                }
+                                <td class=@ViewBag.ctd>@oElemento.operacion_nombre</td>
+                            </tr>
+                         }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 

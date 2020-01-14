@@ -25,7 +25,7 @@ namespace WebApplication2.Models.ViewModels
         public DateTime fecha_fin { set; get; }
 
         [Required]
-        [Display(Name = "Valor de presupuesto")]
+        [Display(Name = "Total de Ingresos")]
         public decimal total_ingresos { set; get; }
 
         [Required]
@@ -52,7 +52,7 @@ namespace WebApplication2.Models.ViewModels
         public DateTime fecha_fin { set; get; }
 
         [Required]
-        [Display(Name = "Valor de presupuesto")]
+        [Display(Name = "Total de Ingresos")]
         public decimal total_ingresos { set; get; }
 
         [Required]

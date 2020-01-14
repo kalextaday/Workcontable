@@ -1,56 +1,89 @@
 ﻿@model List<WebApplication2.Models.TableViewModels.DetPreTableViewModel>
 @{
     ViewBag.Title = "Detalle Presupuesto";
+    Layout = "~/Views/Shared/_LayoutCustom.cshtml";
+
 
     int i = 1;
 
     int vid_presu = ViewBag.id_presu;
 }
 
-<br>
-<br>
-<br>
-<br>
+<div class="container-fluid">
 
-<div class="row">
-    <h3>@ViewBag.Title</h3>
-</div>
-<br />
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">@ViewBag.Title</h1>
 
-<div class="row">
-    <div class="col-md-12">
-        <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/TransPresu/Add/"+@vid_presu)'" value="NuevaTransaccion" />
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+        <a href="@Url.Action("Add", "TransPresu",new { id = vid_presu })" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Nueva Transaccion</a>
+
+        <div align="right">
+            <a href="@Url.Action("Export","TransPresu")" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Exportar a excel</a>
+        </div>
+    </div>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Transacciones del Presupuesto</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tipo</th>
+                            <th>Rubro</th>
+                            <th>Fecha</th>
+                            <th>Subtotal</th>
+                            <th>Impuesto</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Tipo</th>
+                            <th>Rubro</th>
+                            <th>Fecha</th>
+                            <th>Subtotal</th>
+                            <th>Impuesto</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var oElemento in Model)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td>@oElemento.tipo_nombre</td>
+                                <td>@oElemento.rubro_nombre</td>
+                                <td>@oElemento.fecha</td>
+                                <td>@oElemento.subtotal</td>
+                                <td>@oElemento.impuesto</td>
+                                <td>@oElemento.total</td>
+                                <td>
+                                    <div class="d-sm-flex align-items-center">
+                                        <a href="@Url.Action("Edit", "TransPresu",new { id = oElemento.tra_pre_id })" class="btn btn-warning btn-circle">
+                                            <i class="fas fa-fw fa-edit"></i>
+                                        </a>
+                                        &nbsp;&nbsp;
+                                        <a href="javascript:jsDelete(@oElemento.id_reg_det_pre);" class="btn btn-danger btn-circle">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
-<br />
-
-<div>
-    <div class="col-lg-12">
-        <table class="table table-bordered table-responsive">
-            <tr>
-                <th>#</th>
-                <th>Tipo</th>
-                <th>Rubro</th>
-                <th>Fecha</th>
-                <th>Subtotal</th>
-                <th>Impuesto</th>
-                <th>Total</th>
-            </tr>
-            @foreach (var oElemento in Model)
-            {
-                <tr>
-                    <td>@i</td>
-                    <td>@oElemento.tipo_nombre</td>
-                    <td>@oElemento.rubro_nombre</td>
-                    <td>@oElemento.fecha</td>
-                    <td>@oElemento.subtotal</td>
-                    <td>@oElemento.impuesto</td>
-                    <td>@oElemento.total</td>
-                </tr>
-                i++;
-            }
-        </table>
-    </div>
-</div>
-
-
