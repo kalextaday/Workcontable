@@ -1,7 +1,7 @@
 ﻿@model List<WebApplication2.Models.TableViewModels.UsuarioTableViewModel>
 @{
-    ViewBag.Title = "Usuarios";
-
+    ViewBag.Title = "Registro de Usuarios";
+    /*
     if (ViewBag.rol == 1)
     {
         //Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -14,12 +14,17 @@
     else
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+    }*/
+
+    Layout = "~/Views/Shared/_LayoutCustom.cshtml";
 }
 
 
 <div class="container-fluid">
 
+    <div>
+        <img src="@Url.Content("~/img/logo_Workcontable.png")" />
+    </div>
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">@ViewBag.Title</h1>
 
@@ -109,6 +114,12 @@
             </div>
         </div>
     </div>
+    <div>
+        Usuario: @ViewBag.nombreUsuario
+        <br />
+        Fecha:@DateTime.Now;
+    </div>
+
 </div>
 
 

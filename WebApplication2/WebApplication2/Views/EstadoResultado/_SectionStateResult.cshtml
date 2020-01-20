@@ -1,0 +1,77 @@
+﻿@model WebApplication2.Models.TableViewModels.EstadoResulTableViewModel
+
+@{ 
+    decimal tPorcentaje = 100;
+    decimal porcentaje = 0;
+
+}
+<div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Desde: @Model.fecha_inicio</h6><br />
+    <h6 class="m-0 font-weight-bold text-primary">Hasta: @Model.fecha_fin</h6>
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="35%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Valor</th>
+                    <th>Porcentaje</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ingresos Actividades Ordinarias</td>
+                    <td>@Model.ingresos</td>
+                    <td>@tPorcentaje %</td>
+                </tr>
+                <tr>
+                    <th>Utilidad Bruta</th>
+                    <td>@Model.utilidad_bruta</td>
+                    @{
+                        porcentaje = (@Model.utilidad_bruta * 100) / @Model.ingresos;
+                        porcentaje = Decimal.Round(porcentaje,2);
+                    }
+                    <td>@porcentaje %</td>
+                </tr>
+                <tr>
+                    <td>Gastos</td>
+                    <td>@Model.gastos</td>
+                    @{
+                        porcentaje = (@Model.gastos * 100) / @Model.ingresos;
+                        porcentaje = Decimal.Round(porcentaje, 2);
+                    }
+                    <td>@porcentaje %</td>
+                </tr>
+                <tr>
+                    <th>Utilidad Antes de impuestos</th>
+                    <td>@Model.utilidad_antes_imp</td>
+                    @{
+                        porcentaje = (@Model.utilidad_antes_imp * 100) / @Model.ingresos;
+                        porcentaje = Decimal.Round(porcentaje, 2);
+                    }
+                    <td>@porcentaje %</td>
+                </tr>
+                <tr>
+                    <td>Impuestos</td>
+                    <td>@Model.impuestos</td>
+                    @{
+                        porcentaje = (@Model.impuestos * 100) / @Model.ingresos;
+                        porcentaje = Decimal.Round(porcentaje, 2);
+                    }
+                    <td>@porcentaje %</td>
+                </tr>
+                <tr>
+                    <th>Utilidad del Ejercicio</th>
+                    <td>@Model.utilidad_ejercicio</td>
+                    @{
+                        porcentaje = (@Model.utilidad_ejercicio * 100) / @Model.ingresos;
+                        porcentaje = Decimal.Round(porcentaje, 2);
+                    }
+                    <td>@porcentaje %</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

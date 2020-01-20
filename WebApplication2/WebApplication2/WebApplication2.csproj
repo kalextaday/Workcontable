@@ -197,7 +197,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccessController.cs" />
     <Compile Include="Controllers\CerrarController.cs" />
+    <Compile Include="Controllers\ComparativoController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\EstadoResultadoController.cs" />
     <Compile Include="Controllers\GeneralController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LibroContableController.cs" />
@@ -207,6 +209,7 @@
     <Compile Include="Controllers\TransPresuController.cs" />
     <Compile Include="Controllers\TransRealController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Extensions\FlashMessageExtensions.cs" />
     <Compile Include="Filters\AuthorizeUser.cs" />
     <Compile Include="Filters\Encryption.cs" />
     <Compile Include="Filters\VerifyAccess.cs" />
@@ -214,10 +217,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EMPRESA.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ESTADO_RESULTADO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FACTURA.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IDIOMA.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LIBRO_CONTABLE.cs">
@@ -262,8 +271,11 @@
     <Compile Include="Models\RUBRO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TableViewModels\ComparativoTableViewModel.cs" />
     <Compile Include="Models\TableViewModels\DetLBTableViewModel.cs" />
     <Compile Include="Models\TableViewModels\DetPreTableViewModel.cs" />
+    <Compile Include="Models\TableViewModels\EmpresaTableViewModel.cs" />
+    <Compile Include="Models\TableViewModels\EstadoResulTableViewModel.cs" />
     <Compile Include="Models\TableViewModels\LBTableViewModel.cs" />
     <Compile Include="Models\TableViewModels\PermisoTableViewModel.cs" />
     <Compile Include="Models\TableViewModels\PresuTableViewModel.cs" />
@@ -286,6 +298,7 @@
     <Compile Include="Models\ViewModels\TransPreViewModel.cs" />
     <Compile Include="Models\ViewModels\TransRealViewModel.cs" />
     <Compile Include="Models\ViewModels\UsuarioViewModel.cs" />
+    <Compile Include="Models\ViewModels\UsuExternoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -299,6 +312,12 @@
     <Content Include="Assets\Login\js\sb-admin-2.js" />
     <Content Include="Assets\Login\js\sb-admin-2.min.js" />
     <Content Include="Assets\Login\own_img\login.jpg" />
+    <Content Include="Assets\Login\own_img\undraw_access_account_99n5.svg" />
+    <Content Include="Assets\Login\own_img\undraw_Creation_process_ukbh.svg" />
+    <Content Include="Assets\Login\own_img\undraw_fingerprint_swrc.svg" />
+    <Content Include="Assets\Login\own_img\undraw_Login_v483.svg" />
+    <Content Include="Assets\Login\own_img\undraw_mobile_login_ikmv.svg" />
+    <Content Include="Assets\Login\own_img\undraw_sign_in_e6hj.svg" />
     <Content Include="Assets\Login\vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="Assets\Login\vendor\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="Assets\Login\vendor\bootstrap\js\bootstrap.js" />
@@ -2156,6 +2175,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.flashmessage.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -2202,6 +2223,12 @@
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutRegister.cshtml" />
     <Content Include="Views\Shared\_LayoutCustom.cshtml" />
+    <Content Include="Views\Shared\_Flash.cshtml" />
+    <Content Include="Views\Comparativo\Index.cshtml" />
+    <Content Include="Views\Comparativo\Resultados.cshtml" />
+    <Content Include="Views\Comparativo\_Compare.cshtml" />
+    <Content Include="Views\EstadoResultado\Index.cshtml" />
+    <Content Include="Views\EstadoResultado\_SectionStateResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Logs\" />

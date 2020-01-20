@@ -12,16 +12,16 @@ namespace WebApplication2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ESTADO_RESULTADO
+    public partial class EMPRESA
     {
-        public int ID_EST_RES { get; set; }
-        public int LIB_CONTABLE_ID { get; set; }
-        public decimal UTILIDAD_BRUTA { get; set; }
-        public decimal UTILIDAD_ANTES_IMP { get; set; }
-        public decimal UTILIDAD_EJERCICIO { get; set; }
-        public System.DateTime FECHA_INICIO { get; set; }
-        public System.DateTime FECHA_FIN { get; set; }
-    
-        public virtual LIBRO_CONTABLE LIBRO_CONTABLE { get; set; }
+        public int ID_EMPRESA { get; set; }
+        public string NOMBRE_COMERCIAL { get; set; }
+        public string RUC { get; set; }
+        public string NOMBRE_RESPONSABLE { get; set; }
+        public string DIRECCION { get; set; }
+        public string TELEFONO { get; set; }
+        public string EMAIL { get; set; }
+        public string ACTIVIDAD_ECONOMICA { get; set; }
+        public string AUTORIZACION_SRI { get; set; }
     }
 }

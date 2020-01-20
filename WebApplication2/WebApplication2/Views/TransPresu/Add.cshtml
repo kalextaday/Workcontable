@@ -6,6 +6,8 @@
 
     string sidP = ViewBag.id_presu+"";
     int idP = ViewBag.id_presu;
+
+
 }
 
 <div class="container-fluid">
@@ -31,7 +33,7 @@
                     @Html.LabelFor(d => d.pre_id)
                     @Html.Label("*")
                     //@Html.TextBoxFor(d => d.usu_id, @sidP)<br />
-                    @Html.TextBoxFor(d => d.pre_id, new { @Value = @sidP, @class = "form-control" })<br />
+                    @Html.TextBoxFor(d => d.pre_id, new { @Value = @sidP, @class = "form-control", @readonly= "readonly"})<br />
 
 
                     @Html.LabelFor(d => d.tipo)

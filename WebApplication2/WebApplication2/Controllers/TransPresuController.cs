@@ -8,16 +8,22 @@ using WebApplication2.Models.TableViewModels;
 using WebApplication2.Models.ViewModels;
 using WebApplication2.Filters;
 using System.Data.Entity.Validation;
+using NLog;
+using System.Data.Entity.Infrastructure;
+using System.Text;
 
 namespace WebApplication2.Controllers
 {
     public class TransPresuController : Controller
     {
+        private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
 
         USUARIO sesion_Usuario = null;
-        int presupuesto_id;
 
-        // GET: Add TransPresu
+
+        //*** AÑADIR ***
+        // GET: TransPresu
+        #region
         public ActionResult Add(int id)
         {
             ViewBag.id_presu = id;
@@ -54,7 +60,11 @@ namespace WebApplication2.Controllers
 
             return View();
         }
+        #endregion
 
+        //*** AÑADIR ***
+        // POST: Transaccion Presupuesto,Detalle del presupuesto y actualizacion Presupuesto
+        #region
         [HttpPost]
         public ActionResult Add(TransPreViewModel model)
         {
@@ -69,10 +79,9 @@ namespace WebApplication2.Controllers
             {
                 using (var db = new Entities())
                 {
-
+                    //Agregando transaccion del presupuesto
                     TRANSACCION_PRE oTraPresu = new TRANSACCION_PRE();
 
-                    
                     oTraPresu.RUB_ID = model.rub_id;
                     oTraPresu.TIPO = model.tipo;
                     oTraPresu.FECHA = model.fecha;
@@ -84,7 +93,7 @@ namespace WebApplication2.Controllers
                     db.TRANSACCION_PRE.Add(oTraPresu);
                     db.SaveChanges();
 
-
+                    //Agregando detalle de la transaccion al presupuesto
                     int id_TransPre = oTraPresu.ID_TRANS_PRE;
 
                     using (var db2 = new Entities())
@@ -97,25 +106,61 @@ namespace WebApplication2.Controllers
                         db2.REG_DET_PRESUPUESTOS.Add(oDetPre);
                         db2.SaveChanges();
                     }
-                    
-                }
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entidad de tipo \"{0}\" en estado \"{1}\" tiene los siguientes errores:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
+
+                    //Actilizando Valores del presupuesto
+                    using (var dbPre = new Entities())
                     {
-                        Console.WriteLine("- Propiedad: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
+                        var oPresu = dbPre.PRESUPUESTO.Find(model.pre_id);
+
+                        if (!model.tipo) //Si el tipo es falso = gasto 
+                        {
+                            oPresu.TOTAL_GASTOS = oPresu.TOTAL_GASTOS + model.total;
+                        }
+                        else
+                        {
+                            oPresu.VALOR_PRE = oPresu.VALOR_PRE + model.total;
+                        }
+
+                        dbPre.Entry(oPresu).State = System.Data.Entity.EntityState.Modified;
+                        dbPre.SaveChanges();
                     }
+
                 }
-                throw;
+
+                return Redirect(Url.Content("~/Presupuesto/"));
+            }
+            catch (DbUpdateException e)
+            {
+                var causa = analizeCaseError(e, "causa");
+                var consecuencia = analizeCaseError(e, "consecuencia");
+                _logger.Info("Causa: " + causa.ToString() + "\nConsecuencia: " + consecuencia.ToString());
+
+                return Redirect(Url.Action("Add", "TransPresu"));
+            }
+        }
+        #endregion
+
+        //*** ANALISIS DE EXCEPCIONES ***
+        #region
+        public StringBuilder analizeCaseError(DbUpdateException e, string suceso)
+        {
+            var analisis = new StringBuilder();
+
+            if (suceso.Equals("causa"))
+            {
+                analisis.AppendLine($"DbUpdateException detalle: {e?.InnerException?.InnerException?.Message}");
+            }
+            else
+            {
+                foreach (var eve in e.Entries)
+                {
+                    analisis.AppendLine($"Entidad: {eve.Entity.GetType().Name} en estado {eve.State} no pudo ser actualizada");
+                }
             }
 
-            return Redirect(Url.Content("~/Presupuesto/"));
+            return analisis;
         }
+        #endregion
+
     }
 }

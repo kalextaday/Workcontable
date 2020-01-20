@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Estado de Resultados Integrales";
+    Layout = "~/Views/Shared/_LayoutCustom.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">@ViewBag.Title</h1>
+
+    <div class="d-sm-inline-block align-items-center justify-content-between mb-4">
+        <h6>Libro Contable de la fecha:</h6>
+        <div class="d-sm-inline-flex">
+            @Html.DropDownList("fecha_desde", (List<SelectListItem>)ViewBag.opc_fecha_inicio, new { @class = "form-control", @id = "f_desde", @required = "required" })<br />
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-success" type="button" id="btnCargar">
+                Generar
+            </button>
+        </div>
+        
+    </div>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4" id="divGet">
+
+        <!-- Contenido de la pagina parcial -->
+        
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        var selectElement = document.querySelector('#f_desde');
+        var id_f_desde;
+        selectElement.addEventListener('change', (event) => {
+            id_f_desde = event.target.value;
+        });
+
+
+        $(function () {
+            $("#btnCargar").click(function () {
+
+                alert("desde: " + id_f_desde);
+
+                var url = "@Url.Action("SectionStateResult", "EstadoResultado", new { id = "param-id"})";
+
+                url = url.replace("param-id", id_f_desde);
+
+                $.get(url).done(function (data) {
+                    $("#divGet").append(data);
+                });
+
+            });
+        });
+    </script>
+}
+

@@ -22,6 +22,7 @@ namespace WebApplication2.Models
             this.ROL_OPERACION = new HashSet<ROL_OPERACION>();
             this.TRANSACCION_PRE = new HashSet<TRANSACCION_PRE>();
             this.TRANSACCION_REAL = new HashSet<TRANSACCION_REAL>();
+            this.IDIOMA = new HashSet<IDIOMA>();
         }
     
         public int ID_USUARIO { get; set; }
@@ -47,5 +48,7 @@ namespace WebApplication2.Models
         public virtual ICollection<TRANSACCION_PRE> TRANSACCION_PRE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TRANSACCION_REAL> TRANSACCION_REAL { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IDIOMA> IDIOMA { get; set; }
     }
 }

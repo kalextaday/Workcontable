@@ -17,8 +17,8 @@ namespace WebApplication2.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LIBRO_CONTABLE()
         {
-            this.ESTADO_RESULTADO = new HashSet<ESTADO_RESULTADO>();
             this.REG_DET_LIBROS = new HashSet<REG_DET_LIBROS>();
+            this.ESTADO_RESULTADO = new HashSet<ESTADO_RESULTADO>();
         }
     
         public int ID_LIB_CONTABLE { get; set; }
@@ -28,10 +28,10 @@ namespace WebApplication2.Models
         public decimal TOTAL_INGRESOS { get; set; }
         public decimal TOTAL_GASTOS { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ESTADO_RESULTADO> ESTADO_RESULTADO { get; set; }
         public virtual USUARIO USUARIO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REG_DET_LIBROS> REG_DET_LIBROS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ESTADO_RESULTADO> ESTADO_RESULTADO { get; set; }
     }
 }

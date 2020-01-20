@@ -128,7 +128,7 @@ namespace WebApplication2.Controllers
                     oPresu.FECHA_INICIO = model.fecha_inicio;
                     oPresu.FECHA_FIN = model.fecha_fin;
                     oPresu.VALOR_PRE = model.valor_pre;
-                    oPresu.TOTAL_GASTOS = model.total_gastos;
+                    oPresu.TOTAL_GASTOS = 0;
 
                     db.PRESUPUESTO.Add(oPresu);
                     db.SaveChanges();

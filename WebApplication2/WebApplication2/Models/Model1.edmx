@@ -5,17 +5,31 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="ID_EMPRESA" />
+          </Key>
+          <Property Name="ID_EMPRESA" Type="number" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE_COMERCIAL" Type="nvarchar2" MaxLength="64" Nullable="false" />
+          <Property Name="RUC" Type="nvarchar2" MaxLength="15" Nullable="false" />
+          <Property Name="NOMBRE_RESPONSABLE" Type="nvarchar2" MaxLength="232" Nullable="false" />
+          <Property Name="DIRECCION" Type="nvarchar2" MaxLength="250" Nullable="false" />
+          <Property Name="TELEFONO" Type="nvarchar2" MaxLength="10" Nullable="false" />
+          <Property Name="EMAIL" Type="nvarchar2" MaxLength="200" Nullable="false" />
+          <Property Name="ACTIVIDAD_ECONOMICA" Type="nvarchar2" MaxLength="250" Nullable="false" />
+          <Property Name="AUTORIZACION_SRI" Type="nvarchar2" MaxLength="32" Nullable="false" />
+        </EntityType>
         <EntityType Name="ESTADO_RESULTADO">
           <Key>
             <PropertyRef Name="ID_EST_RES" />
           </Key>
           <Property Name="ID_EST_RES" Type="number" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LIB_CONTABLE_ID" Type="number" Precision="8" Scale="0" />
-          <Property Name="UTILIDAD_BRUTA" Type="number" Precision="10" Scale="3" />
-          <Property Name="UTILIDAD_ANTES_IMP" Type="number" Precision="10" Scale="3" />
-          <Property Name="UTILIDAD_EJERCICIO" Type="number" Precision="10" Scale="3" />
-          <Property Name="FECHA_INICIO" Type="timestamp" Precision="6" />
-          <Property Name="FECHA_FIN" Type="timestamp" Precision="6" />
+          <Property Name="LIB_CONTABLE_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="UTILIDAD_BRUTA" Type="number" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="UTILIDAD_ANTES_IMP" Type="number" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="UTILIDAD_EJERCICIO" Type="number" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="FECHA_INICIO" Type="timestamp" Precision="6" Nullable="false" />
+          <Property Name="FECHA_FIN" Type="timestamp" Precision="6" Nullable="false" />
         </EntityType>
         <EntityType Name="FACTURA">
           <Key>
@@ -24,6 +38,14 @@
           <Property Name="ID_FACTURA" Type="number" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NUMERO" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="FOTO" Type="blob" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IDIOMA">
+          <Key>
+            <PropertyRef Name="ID_IDIOMA" />
+          </Key>
+          <Property Name="ID_IDIOMA" Type="number" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USU_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar2" MaxLength="32" Nullable="false" />
         </EntityType>
         <EntityType Name="LIBRO_CONTABLE">
           <Key>
@@ -145,7 +167,7 @@
           <Property Name="EMAIL" Type="varchar2" MaxLength="150" />
         </EntityType>
         <Association Name="FK_ESTADO_R_RELATIONS_LIBRO_CO">
-          <End Role="LIBRO_CONTABLE" Type="Self.LIBRO_CONTABLE" Multiplicity="0..1" />
+          <End Role="LIBRO_CONTABLE" Type="Self.LIBRO_CONTABLE" Multiplicity="1" />
           <End Role="ESTADO_RESULTADO" Type="Self.ESTADO_RESULTADO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LIBRO_CONTABLE">
@@ -264,6 +286,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="IDIOMA_USUARIO_ID_USUARIO_FK">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="IDIOMA" Type="Self.IDIOMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="IDIOMA">
+              <PropertyRef Name="USU_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="OPER_MODULO_ID_MODULO_FK">
           <End Role="MODULO" Type="Self.MODULO" Multiplicity="1" />
           <End Role="OPERACION" Type="Self.OPERACION" Multiplicity="*" />
@@ -337,8 +371,10 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="PRUEBA" store:Type="Tables" />
           <EntitySet Name="ESTADO_RESULTADO" EntityType="Self.ESTADO_RESULTADO" Schema="PRUEBA" store:Type="Tables" />
           <EntitySet Name="FACTURA" EntityType="Self.FACTURA" Schema="PRUEBA" store:Type="Tables" />
+          <EntitySet Name="IDIOMA" EntityType="Self.IDIOMA" Schema="PRUEBA" store:Type="Tables" />
           <EntitySet Name="LIBRO_CONTABLE" EntityType="Self.LIBRO_CONTABLE" Schema="PRUEBA" store:Type="Tables" />
           <EntitySet Name="MODULO" EntityType="Self.MODULO" Schema="PRUEBA" store:Type="Tables" />
           <EntitySet Name="OPERACION" EntityType="Self.OPERACION" Schema="PRUEBA" store:Type="Tables" />
@@ -391,6 +427,10 @@
             <End Role="ROL" EntitySet="ROL" />
             <End Role="USUARIO" EntitySet="USUARIO" />
           </AssociationSet>
+          <AssociationSet Name="IDIOMA_USUARIO_ID_USUARIO_FK" Association="Self.IDIOMA_USUARIO_ID_USUARIO_FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="IDIOMA" EntitySet="IDIOMA" />
+          </AssociationSet>
           <AssociationSet Name="OPER_MODULO_ID_MODULO_FK" Association="Self.OPER_MODULO_ID_MODULO_FK">
             <End Role="MODULO" EntitySet="MODULO" />
             <End Role="OPERACION" EntitySet="OPERACION" />
@@ -421,7 +461,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ESTADO_RESULTADO" EntityType="Model.ESTADO_RESULTADO" />
           <EntitySet Name="LIBRO_CONTABLE" EntityType="Model.LIBRO_CONTABLE" />
           <EntitySet Name="MODULO" EntityType="Model.MODULO" />
           <EntitySet Name="OPERACION" EntityType="Model.OPERACION" />
@@ -434,10 +473,6 @@
           <EntitySet Name="TRANSACCION_PRE" EntityType="Model.TRANSACCION_PRE" />
           <EntitySet Name="TRANSACCION_REAL" EntityType="Model.TRANSACCION_REAL" />
           <EntitySet Name="USUARIO" EntityType="Model.USUARIO" />
-          <AssociationSet Name="FK_ESTADO_R_RELATIONS_LIBRO_CO" Association="Model.FK_ESTADO_R_RELATIONS_LIBRO_CO">
-            <End Role="LIBRO_CONTABLE" EntitySet="LIBRO_CONTABLE" />
-            <End Role="ESTADO_RESULTADO" EntitySet="ESTADO_RESULTADO" />
-          </AssociationSet>
           <AssociationSet Name="FK_LIBRO_CO_RELATIONS_USUARIO" Association="Model.FK_LIBRO_CO_RELATIONS_USUARIO">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="LIBRO_CONTABLE" EntitySet="LIBRO_CONTABLE" />
@@ -499,20 +534,18 @@
             <End Role="FACTURA" EntitySet="FACTURA" />
             <End Role="TRANSACCION_REAL" EntitySet="TRANSACCION_REAL" />
           </AssociationSet>
+          <EntitySet Name="EMPRESA" EntityType="Model.EMPRESA" />
+          <EntitySet Name="IDIOMA" EntityType="Model.IDIOMA" />
+          <AssociationSet Name="IDIOMA_USUARIO_ID_USUARIO_FK" Association="Model.IDIOMA_USUARIO_ID_USUARIO_FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="IDIOMA" EntitySet="IDIOMA" />
+          </AssociationSet>
+          <EntitySet Name="ESTADO_RESULTADO" EntityType="Model.ESTADO_RESULTADO" />
+          <AssociationSet Name="FK_ESTADO_R_RELATIONS_LIBRO_CO" Association="Model.FK_ESTADO_R_RELATIONS_LIBRO_CO">
+            <End Role="LIBRO_CONTABLE" EntitySet="LIBRO_CONTABLE" />
+            <End Role="ESTADO_RESULTADO" EntitySet="ESTADO_RESULTADO" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="ESTADO_RESULTADO">
-          <Key>
-            <PropertyRef Name="ID_EST_RES" />
-          </Key>
-          <Property Name="ID_EST_RES" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LIB_CONTABLE_ID" Type="Int32" />
-          <Property Name="UTILIDAD_BRUTA" Type="Decimal" Precision="10" Scale="3" />
-          <Property Name="UTILIDAD_ANTES_IMP" Type="Decimal" Precision="10" Scale="3" />
-          <Property Name="UTILIDAD_EJERCICIO" Type="Decimal" Precision="10" Scale="3" />
-          <Property Name="FECHA_INICIO" Type="DateTime" Precision="6" />
-          <Property Name="FECHA_FIN" Type="DateTime" Precision="6" />
-          <NavigationProperty Name="LIBRO_CONTABLE" Relationship="Model.FK_ESTADO_R_RELATIONS_LIBRO_CO" FromRole="ESTADO_RESULTADO" ToRole="LIBRO_CONTABLE" />
-        </EntityType>
         <EntityType Name="LIBRO_CONTABLE">
           <Key>
             <PropertyRef Name="ID_LIB_CONTABLE" />
@@ -523,9 +556,9 @@
           <Property Name="FECHA_FIN" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="TOTAL_INGRESOS" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
           <Property Name="TOTAL_GASTOS" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <NavigationProperty Name="ESTADO_RESULTADO" Relationship="Model.FK_ESTADO_R_RELATIONS_LIBRO_CO" FromRole="LIBRO_CONTABLE" ToRole="ESTADO_RESULTADO" />
           <NavigationProperty Name="USUARIO" Relationship="Model.FK_LIBRO_CO_RELATIONS_USUARIO" FromRole="LIBRO_CONTABLE" ToRole="USUARIO" />
           <NavigationProperty Name="REG_DET_LIBROS" Relationship="Model.FK_REG_DET__RELATIONS_LIBRO_CO" FromRole="LIBRO_CONTABLE" ToRole="REG_DET_LIBROS" />
+          <NavigationProperty Name="ESTADO_RESULTADO" Relationship="Model.FK_ESTADO_R_RELATIONS_LIBRO_CO" FromRole="LIBRO_CONTABLE" ToRole="ESTADO_RESULTADO" />
         </EntityType>
         <EntityType Name="MODULO">
           <Key>
@@ -661,19 +694,8 @@
           <NavigationProperty Name="ROL_OPERACION" Relationship="Model.ROL_OPER_USU___FK" FromRole="USUARIO" ToRole="ROL_OPERACION" />
           <NavigationProperty Name="TRANSACCION_PRE" Relationship="Model.TRANSA_PRE_USUARIO__FK" FromRole="USUARIO" ToRole="TRANSACCION_PRE" />
           <NavigationProperty Name="TRANSACCION_REAL" Relationship="Model.TRANSA_REAL_USUARIO__FK" FromRole="USUARIO" ToRole="TRANSACCION_REAL" />
+          <NavigationProperty Name="IDIOMA" Relationship="Model.IDIOMA_USUARIO_ID_USUARIO_FK" FromRole="USUARIO" ToRole="IDIOMA" />
         </EntityType>
-        <Association Name="FK_ESTADO_R_RELATIONS_LIBRO_CO">
-          <End Type="Model.LIBRO_CONTABLE" Role="LIBRO_CONTABLE" Multiplicity="0..1" />
-          <End Type="Model.ESTADO_RESULTADO" Role="ESTADO_RESULTADO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LIBRO_CONTABLE">
-              <PropertyRef Name="ID_LIB_CONTABLE" />
-            </Principal>
-            <Dependent Role="ESTADO_RESULTADO">
-              <PropertyRef Name="LIB_CONTABLE_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LIBRO_CO_RELATIONS_USUARIO">
           <End Type="Model.USUARIO" Role="USUARIO" Multiplicity="1" />
           <End Type="Model.LIBRO_CONTABLE" Role="LIBRO_CONTABLE" Multiplicity="*" />
@@ -863,25 +885,72 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="ID_EMPRESA" />
+          </Key>
+          <Property Name="ID_EMPRESA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE_COMERCIAL" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="RUC" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRE_RESPONSABLE" Type="String" Nullable="false" MaxLength="232" FixedLength="false" Unicode="true" />
+          <Property Name="DIRECCION" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TELEFONO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ACTIVIDAD_ECONOMICA" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AUTORIZACION_SRI" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="IDIOMA">
+          <Key>
+            <PropertyRef Name="ID_IDIOMA" />
+          </Key>
+          <Property Name="ID_IDIOMA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USU_ID" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="USUARIO" Relationship="Model.IDIOMA_USUARIO_ID_USUARIO_FK" FromRole="IDIOMA" ToRole="USUARIO" />
+        </EntityType>
+        <Association Name="IDIOMA_USUARIO_ID_USUARIO_FK">
+          <End Type="Model.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="Model.IDIOMA" Role="IDIOMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="IDIOMA">
+              <PropertyRef Name="USU_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ESTADO_RESULTADO">
+          <Key>
+            <PropertyRef Name="ID_EST_RES" />
+          </Key>
+          <Property Name="ID_EST_RES" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LIB_CONTABLE_ID" Type="Int32" Nullable="false" />
+          <Property Name="UTILIDAD_BRUTA" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="UTILIDAD_ANTES_IMP" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="UTILIDAD_EJERCICIO" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="FECHA_INICIO" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="FECHA_FIN" Type="DateTime" Nullable="false" Precision="6" />
+          <NavigationProperty Name="LIBRO_CONTABLE" Relationship="Model.FK_ESTADO_R_RELATIONS_LIBRO_CO" FromRole="ESTADO_RESULTADO" ToRole="LIBRO_CONTABLE" />
+        </EntityType>
+        <Association Name="FK_ESTADO_R_RELATIONS_LIBRO_CO">
+          <End Type="Model.LIBRO_CONTABLE" Role="LIBRO_CONTABLE" Multiplicity="1" />
+          <End Type="Model.ESTADO_RESULTADO" Role="ESTADO_RESULTADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LIBRO_CONTABLE">
+              <PropertyRef Name="ID_LIB_CONTABLE" />
+            </Principal>
+            <Dependent Role="ESTADO_RESULTADO">
+              <PropertyRef Name="LIB_CONTABLE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
-          <EntitySetMapping Name="ESTADO_RESULTADO">
-            <EntityTypeMapping TypeName="Model.ESTADO_RESULTADO">
-              <MappingFragment StoreEntitySet="ESTADO_RESULTADO">
-                <ScalarProperty Name="FECHA_FIN" ColumnName="FECHA_FIN" />
-                <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
-                <ScalarProperty Name="UTILIDAD_EJERCICIO" ColumnName="UTILIDAD_EJERCICIO" />
-                <ScalarProperty Name="UTILIDAD_ANTES_IMP" ColumnName="UTILIDAD_ANTES_IMP" />
-                <ScalarProperty Name="UTILIDAD_BRUTA" ColumnName="UTILIDAD_BRUTA" />
-                <ScalarProperty Name="LIB_CONTABLE_ID" ColumnName="LIB_CONTABLE_ID" />
-                <ScalarProperty Name="ID_EST_RES" ColumnName="ID_EST_RES" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LIBRO_CONTABLE">
             <EntityTypeMapping TypeName="Model.LIBRO_CONTABLE">
               <MappingFragment StoreEntitySet="LIBRO_CONTABLE">
@@ -1019,6 +1088,43 @@
                 <ScalarProperty Name="FOTO" ColumnName="FOTO" />
                 <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
                 <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPRESA">
+            <EntityTypeMapping TypeName="Model.EMPRESA">
+              <MappingFragment StoreEntitySet="EMPRESA">
+                <ScalarProperty Name="AUTORIZACION_SRI" ColumnName="AUTORIZACION_SRI" />
+                <ScalarProperty Name="ACTIVIDAD_ECONOMICA" ColumnName="ACTIVIDAD_ECONOMICA" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="NOMBRE_RESPONSABLE" ColumnName="NOMBRE_RESPONSABLE" />
+                <ScalarProperty Name="RUC" ColumnName="RUC" />
+                <ScalarProperty Name="NOMBRE_COMERCIAL" ColumnName="NOMBRE_COMERCIAL" />
+                <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IDIOMA">
+            <EntityTypeMapping TypeName="Model.IDIOMA">
+              <MappingFragment StoreEntitySet="IDIOMA">
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="USU_ID" ColumnName="USU_ID" />
+                <ScalarProperty Name="ID_IDIOMA" ColumnName="ID_IDIOMA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADO_RESULTADO">
+            <EntityTypeMapping TypeName="Model.ESTADO_RESULTADO">
+              <MappingFragment StoreEntitySet="ESTADO_RESULTADO">
+                <ScalarProperty Name="FECHA_FIN" ColumnName="FECHA_FIN" />
+                <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+                <ScalarProperty Name="UTILIDAD_EJERCICIO" ColumnName="UTILIDAD_EJERCICIO" />
+                <ScalarProperty Name="UTILIDAD_ANTES_IMP" ColumnName="UTILIDAD_ANTES_IMP" />
+                <ScalarProperty Name="UTILIDAD_BRUTA" ColumnName="UTILIDAD_BRUTA" />
+                <ScalarProperty Name="LIB_CONTABLE_ID" ColumnName="LIB_CONTABLE_ID" />
+                <ScalarProperty Name="ID_EST_RES" ColumnName="ID_EST_RES" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

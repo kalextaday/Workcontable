@@ -1,4 +1,4 @@
-﻿
+﻿@model WebApplication2.Models.ViewModels.UsuExternoViewModel
 @{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_LayoutRegister.cshtml";
@@ -7,29 +7,66 @@
 <div class="text-center">
     <h1 class="h4 text-gray-900 mb-4">Crea una Cuenta!</h1>
 </div>
-<form class="user">
+@using (Html.BeginForm("Add", "Register", FormMethod.Post, new { role = "form", @class = "user" }))
+{
+    @Html.AntiForgeryToken() /*atributo de seguridad helper, no hagan peticiones de fuera*/
+
+    @Html.ValidationMessage("error", new { @class = "text-danger" })
+
     <div class="form-group row">
         <div class="col-sm-6 mb-3 mb-sm-0">
-            <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nombres">
+            @Html.TextBoxFor(d => d.nombre, new { @class = "form-control form-control-user", @required = "required" , @placeholder = "Nombres" })
         </div>
         <div class="col-sm-6">
-            <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Apellidos">
+            @Html.TextBoxFor(d => d.apellido, new { @class = "form-control form-control-user", @required = "required", @placeholder = "Apellidos" })
         </div>
     </div>
+
     <div class="form-group">
-        <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Direccion email">
+        @Html.TextBoxFor(d => d.email, new { @type = "email", @class = "form-control form-control-user", @required = "required", @placeholder = "Direccion email" })
     </div>
+
+    <div class="form-group">
+        @Html.TextBoxFor(d => d.nombre_usuario, new { @class = "form-control form-control-user", @required = "required" , @placeholder = "Nombre de usuario" })
+    </div>
+
+    <div class="form-group">
+        @Html.DropDownListFor(d => d.rol_id, (List<SelectListItem>)ViewBag.opc_rol, new { @class = "form-control ", @required = "required" })
+    </div>
+
     <div class="form-group row">
         <div class="col-sm-6 mb-3 mb-sm-0">
-            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+            @Html.PasswordFor(d => d.password, new { @class = "form-control form-control-user", @required = "required", @placeholder = "Password" })
         </div>
         <div class="col-sm-6">
-            <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Confirmar Password">
+            @Html.PasswordFor(d => d.confirmPassword, new { @class = "form-control form-control-user", @required = "required", @placeholder = "Confirmar Password" })
+            @Html.ValidationMessageFor(d => d.confirmPassword, "", new { @class = "text-danger" })
         </div>
     </div>
-    <a href="login.html" class="btn btn-primary btn-user btn-block">
-        Registrar Cuenta
-    </a>
+
+
+    <div class="form-group row">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            @Html.TextBoxFor(d => d.cedula, new { @class = "form-control form-control-user", @required = "required", @placeholder = "Cedula" })
+        </div>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(d => d.ruc, new { @class = "form-control form-control-user", @required = "required", @placeholder = "RUC" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            @Html.TextBoxFor(d => d.direccion, new { @class = "form-control form-control-user", @required = "required", @placeholder = "Direccion" })
+        </div>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(d => d.telefono, new { @class = "form-control form-control-user", @required = "required", @placeholder = "Telefono" })
+        </div>
+    </div>
+
+    <br />
+
+    <input type="submit" class="btn btn-primary btn-user btn-block" value="Registrar Cuenta" />
+
     <hr>
     <a href="index.html" class="btn btn-google btn-user btn-block">
         <i class="fab fa-google fa-fw"></i> Registrar con Google
@@ -37,7 +74,10 @@
     <a href="index.html" class="btn btn-facebook btn-user btn-block">
         <i class="fab fa-facebook-f fa-fw"></i> Registrar con Facebook
     </a>
-</form>
+
+}
+
+
 <hr>
 <div class="text-center">
     <a class="small" href="@Url.Action("ForgotPass", "Access")">¿Se te olvidó tu contraseña?</a>

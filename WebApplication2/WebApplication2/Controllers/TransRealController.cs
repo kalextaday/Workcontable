@@ -8,16 +8,20 @@ using WebApplication2.Models.TableViewModels;
 using WebApplication2.Models.ViewModels;
 using WebApplication2.Filters;
 using System.Data.Entity.Validation;
+using NLog;
+using System.Data.Entity.Infrastructure;
+using System.Text;
 
 namespace WebApplication2.Controllers
 {
     public class TransRealController : Controller
     {
-
+        private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
         USUARIO sesion_Usuario = null;
-        int libContable_id;
 
-        // GET: Add TransPresu
+        //*** AÑADIR ***
+        // GET: TransReal
+        #region
         public ActionResult Add(int id)
         {
             ViewBag.id_lb = id;
@@ -54,8 +58,11 @@ namespace WebApplication2.Controllers
 
             return View();
         }
+        #endregion
 
-
+        //*** AÑADIR ***
+        // POST: Transaccion Real,Detalle del Libro Contable y actualizacion Libro
+        #region
         [HttpPost]
         public ActionResult Add(TransRealViewModel model)
         {
@@ -70,9 +77,8 @@ namespace WebApplication2.Controllers
             {
                 using (var db = new Entities())
                 {
-
+                    //Agregando transaccion del presupuesto
                     TRANSACCION_REAL oTraReal = new TRANSACCION_REAL();
-
 
                     oTraReal.RUB_ID = model.rub_id;
                     oTraReal.TIPO = model.tipo;
@@ -86,40 +92,72 @@ namespace WebApplication2.Controllers
                     db.TRANSACCION_REAL.Add(oTraReal);
                     db.SaveChanges();
 
-
-                    int id_TransPre = oTraReal.ID_TRANS_REAL;
+                    //Agregando detalle de la transaccion al presupuesto
+                    int id_TransLib = oTraReal.ID_TRANS_REAL;
 
                     using (var db2 = new Entities())
                     {
                         REG_DET_LIBROS oDetLib = new REG_DET_LIBROS();
                         oDetLib.LIB_ID = model.lib_id;
-                        oDetLib.TRA_ID = id_TransPre;
+                        oDetLib.TRA_ID = id_TransLib;
 
 
                         db2.REG_DET_LIBROS.Add(oDetLib);
                         db2.SaveChanges();
                     }
 
-                }
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entidad de tipo \"{0}\" en estado \"{1}\" tiene los siguientes errores:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
+                    //Actilizando Valores del presupuesto
+                    using (var dbLib = new Entities())
                     {
-                        Console.WriteLine("- Propiedad: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
+                        var oLib = dbLib.LIBRO_CONTABLE.Find(model.lib_id);
+
+                        if (!model.tipo) //Si el tipo es falso = gasto 
+                        {
+                            oLib.TOTAL_GASTOS = oLib.TOTAL_GASTOS + model.total;
+                        }
+                        else
+                        {
+                            oLib.TOTAL_INGRESOS = oLib.TOTAL_INGRESOS + model.total;
+                        }
+
+                        dbLib.Entry(oLib).State = System.Data.Entity.EntityState.Modified;
+                        dbLib.SaveChanges();
                     }
                 }
-                throw;
+                return Redirect(Url.Content("~/LibroContable/"));
+            }
+            catch (DbUpdateException e)
+            {
+                var causa = analizeCaseError(e, "causa");
+                var consecuencia = analizeCaseError(e, "consecuencia");
+                _logger.Info("Causa: " + causa.ToString() + "\nConsecuencia: " + consecuencia.ToString());
+
+                return Redirect(Url.Action("Add", "TransReal"));
+            }
+        }
+        #endregion
+
+        //*** ANALISIS DE EXCEPCIONES ***
+        #region
+        public StringBuilder analizeCaseError(DbUpdateException e, string suceso)
+        {
+            var analisis = new StringBuilder();
+
+            if (suceso.Equals("causa"))
+            {
+                analisis.AppendLine($"DbUpdateException detalle: {e?.InnerException?.InnerException?.Message}");
+            }
+            else
+            {
+                foreach (var eve in e.Entries)
+                {
+                    analisis.AppendLine($"Entidad: {eve.Entity.GetType().Name} en estado {eve.State} no pudo ser actualizada");
+                }
             }
 
-            return Redirect(Url.Content("~/LibroContable/"));
+            return analisis;
         }
-
+        #endregion
 
     }
 }

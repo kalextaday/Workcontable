@@ -44,4 +44,15 @@ namespace WebApplication2.Models.ViewModels
         [Display(Name = "Factura")]
         public int factura_id { get; set; }
     }
+
+    public class FacturaViewModel{
+
+        public int id_factura { get; set; }
+        public string numero { get; set; }
+        public byte[] foto { get; set; }
+
+        public HttpPostedFileBase ImageFile { get; set; } //es la ruta de la imagen
+
+
+    }
 }

@@ -12,16 +12,12 @@ namespace WebApplication2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ESTADO_RESULTADO
+    public partial class IDIOMA
     {
-        public int ID_EST_RES { get; set; }
-        public int LIB_CONTABLE_ID { get; set; }
-        public decimal UTILIDAD_BRUTA { get; set; }
-        public decimal UTILIDAD_ANTES_IMP { get; set; }
-        public decimal UTILIDAD_EJERCICIO { get; set; }
-        public System.DateTime FECHA_INICIO { get; set; }
-        public System.DateTime FECHA_FIN { get; set; }
+        public int ID_IDIOMA { get; set; }
+        public int USU_ID { get; set; }
+        public string NOMBRE { get; set; }
     
-        public virtual LIBRO_CONTABLE LIBRO_CONTABLE { get; set; }
+        public virtual USUARIO USUARIO { get; set; }
     }
 }

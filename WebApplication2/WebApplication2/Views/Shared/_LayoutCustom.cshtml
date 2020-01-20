@@ -21,7 +21,7 @@
 </head>
 
 <body id="page-top">
-
+    
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -116,7 +116,7 @@
                 <div id="collapseTwoVS" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gestion Analisis:</h6>
-                        <a class="collapse-item" href="@Url.Action("Index", "Comparativo")">Ver</a>
+                        <a class="collapse-item" href="@Url.Action("Resultados", "Comparativo")">Ver</a>
                         <a class="collapse-item" href="@Url.Action("Add", "Comparativo")">Generar</a>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
                 <div id="collapseTwoER" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gestion E. de Resultados:</h6>
-                        <a class="collapse-item" href="@Url.Action("Index", "EstResultado")">Ver</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "EstadoResultado")">Ver</a>
                         <a class="collapse-item" href="@Url.Action("Add", "EstResultado")">Generar</a>
                     </div>
                 </div>
@@ -329,27 +329,27 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Nameuser</span>
                                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    Perfil
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
+                                    Configuraciones
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
+                                    Actividad
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Cerrar Sesion
                                 </a>
                             </div>
                         </li>
@@ -359,11 +359,9 @@
                 </nav>
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
-
-
+                
                 @RenderBody()
-
-
+                @*@Html.Partial("_Flash")*@
 
 
                 <!-- /.container-fluid -->
@@ -374,7 +372,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; WorkContable 2020</span>
+                        <span></span>
                     </div>
                 </div>
             </footer>
@@ -395,40 +393,44 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">¿Listo para salir?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión actual.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="@Url.Action("Logoff", "Cerrar")">Cerrar Sesion</a>
                 </div>
             </div>
         </div>
     </div>
 
+    @Scripts.Render("~/bundles/jquery")
+
     <!-- Bootstrap core JavaScript-->
-    <script src="Assets/Login/vendor/jquery/jquery.min.js"></script>
-    <script src="Assets/Login/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Assets/Login/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Assets/Login/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="Assets/Login/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/Assets/Login/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="Assets/Login/js/sb-admin-2.min.js"></script>
+    <script src="~/Assets/Login/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="Assets/Login/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/Assets/Login/vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="Assets/Login/js/demo/chart-area-demo.js"></script>
-    <script src="Assets/Login/js/demo/chart-pie-demo.js"></script>
-
+    <script src="~/Assets/Login/js/demo/chart-area-demo.js"></script>
+    <script src="~/Assets/Login/js/demo/chart-pie-demo.js"></script>
+    
+    <!-- Flash messages -->
+    <script src="~/Scripts/jquery.cookie.js"> </script>
+    <script src="~/Scripts/jquery.flashmessage.js"> </script>
     @RenderSection("scripts", required: false)
-
-
+    
 </body>
 
 </html>
