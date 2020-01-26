@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "ForgotPass";
+    Layout = "~/Views/Shared/_LayoutForgotPass.cshtml";
+}
+
+<div class="p-5">
+    <div class="text-center">
+        <h1 class="h4 text-gray-900 mb-2">¿Olvidaste tu contraseña?</h1>
+        <p class="mb-4">Lo entendemos, pasan cosas. Simplemente ingrese su dirección de correo electrónico a continuación y le enviaremos un enlace para restablecer su contraseña.</p>
+    </div>
+    <form class="user">
+        <div class="form-group">
+            <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Ingresa tu email...">
+        </div>
+        <a href="login.html" class="btn btn-primary btn-user btn-block">
+            Reestablecer contraseña
+        </a>
+    </form>
+    <hr>
+    <div class="text-center">
+        <a class="small" href="@Url.Action("Index", "Register")">¡Crea una cuenta!</a>
+    </div>
+    <div class="text-center">
+        <a class="small" href="@Url.Action("Index", "Access")">¿Ya tienes una cuenta? ¡Inicia sesión!</a>
+    </div>
+</div>
+

@@ -18,6 +18,7 @@ namespace WebApplication2.Controllers
             sesion_Usuario = (USUARIO)Session["USUARIO"];
 
             ViewBag.rol = sesion_Usuario.ROL_ID;
+            ViewBag.username = sesion_Usuario.NOMBRE_USUARIO;
 
             return View();
         }

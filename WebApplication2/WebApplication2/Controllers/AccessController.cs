@@ -49,5 +49,19 @@ namespace WebApplication2.Controllers
             //return View();
         }
 
+
+        [HttpGet]
+        public ActionResult ForgotPass()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPass(string user, string email)
+        {
+
+            return View();
+        }
+
     }
 }

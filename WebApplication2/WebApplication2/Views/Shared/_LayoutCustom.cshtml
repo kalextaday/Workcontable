@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>WorkContable</title>
+    <title>@ViewBag.Title</title>
 
     <!-- Custom fonts for this template-->
     <link href="~/Assets/Login/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -17,6 +17,10 @@
 
     <!-- Custom styles for this template-->
     <link href="~/Assets/Login/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for profile user-->
+    
+    <link href="~/Assets/Login/css/estilosPerfilUser.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -45,7 +49,7 @@
                 Administrador
             </div>
 
-            <!-- Nav Item - Usuario 2 -->
+            <!-- Nav Item - Usuario -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoUser" aria-expanded="true" aria-controls="collapseTwoUser">
                     <i class="fas fa-fw fa-wrench"></i>
@@ -329,12 +333,12 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Nameuser</span>
-                                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@ViewBag.UserName</span>
+                                <img class="img-profile rounded-circle" style="width: 3rem;" src="~/Assets/Login/own_img/user-circle.svg" alt="">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="@Url.Action("Perfil", "UserInformation")"">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Perfil
                                 </a>
@@ -349,7 +353,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Cerrar Sesion
+                                    Cerrar Sesion <!-- se va a la seccion de logoutModal para cerrar sesion -->
                                 </a>
                             </div>
                         </li>
@@ -361,7 +365,7 @@
                 <!-- Begin Page Content -->
                 
                 @RenderBody()
-                @*@Html.Partial("_Flash")*@
+                
 
 
                 <!-- /.container-fluid -->
@@ -406,9 +410,9 @@
             </div>
         </div>
     </div>
-
-    @Scripts.Render("~/bundles/jquery")
-
+    
+    @Scripts.Render("~/bundles/jquery");
+    <script src="~/Assets/Login/vendor/jquery/jquery.min.js"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="~/Assets/Login/vendor/jquery/jquery.min.js"></script>
     <script src="~/Assets/Login/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -422,13 +426,7 @@
     <!-- Page level plugins -->
     <script src="~/Assets/Login/vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="~/Assets/Login/js/demo/chart-area-demo.js"></script>
-    <script src="~/Assets/Login/js/demo/chart-pie-demo.js"></script>
-    
-    <!-- Flash messages -->
-    <script src="~/Scripts/jquery.cookie.js"> </script>
-    <script src="~/Scripts/jquery.flashmessage.js"> </script>
+
     @RenderSection("scripts", required: false)
     
 </body>

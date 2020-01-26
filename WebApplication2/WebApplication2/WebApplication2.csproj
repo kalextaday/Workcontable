@@ -208,6 +208,7 @@
     <Compile Include="Controllers\RolOperacionController.cs" />
     <Compile Include="Controllers\TransPresuController.cs" />
     <Compile Include="Controllers\TransRealController.cs" />
+    <Compile Include="Controllers\UserInformationController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Extensions\FlashMessageExtensions.cs" />
     <Compile Include="Filters\AuthorizeUser.cs" />
@@ -292,16 +293,19 @@
     <Compile Include="Models\USUARIO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\IdiomaViewModel.cs" />
     <Compile Include="Models\ViewModels\LBViewModel.cs" />
     <Compile Include="Models\ViewModels\PresupuestoViewModel.cs" />
     <Compile Include="Models\ViewModels\RolOperacionViewModel.cs" />
     <Compile Include="Models\ViewModels\TransPreViewModel.cs" />
     <Compile Include="Models\ViewModels\TransRealViewModel.cs" />
+    <Compile Include="Models\ViewModels\UserInfoViewModel.cs" />
     <Compile Include="Models\ViewModels\UsuarioViewModel.cs" />
     <Compile Include="Models\ViewModels\UsuExternoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Login\css\estilosPerfilUser.css" />
     <Content Include="Assets\Login\css\sb-admin-2.css" />
     <Content Include="Assets\Login\css\sb-admin-2.min.css" />
     <Content Include="Assets\Login\img\undraw_posting_photo.svg" />
@@ -311,13 +315,15 @@
     <Content Include="Assets\Login\js\demo\datatables-demo.js" />
     <Content Include="Assets\Login\js\sb-admin-2.js" />
     <Content Include="Assets\Login\js\sb-admin-2.min.js" />
-    <Content Include="Assets\Login\own_img\login.jpg" />
-    <Content Include="Assets\Login\own_img\undraw_access_account_99n5.svg" />
-    <Content Include="Assets\Login\own_img\undraw_Creation_process_ukbh.svg" />
-    <Content Include="Assets\Login\own_img\undraw_fingerprint_swrc.svg" />
-    <Content Include="Assets\Login\own_img\undraw_Login_v483.svg" />
-    <Content Include="Assets\Login\own_img\undraw_mobile_login_ikmv.svg" />
-    <Content Include="Assets\Login\own_img\undraw_sign_in_e6hj.svg" />
+    <Content Include="Assets\Login\own_img\carousel_blue.png" />
+    <Content Include="Assets\Login\own_img\carousel_green.png" />
+    <Content Include="Assets\Login\own_img\carousel_red.png" />
+    <Content Include="Assets\Login\own_img\undraw_access_login.svg" />
+    <Content Include="Assets\Login\own_img\undraw_chore_list_iof3.svg" />
+    <Content Include="Assets\Login\own_img\undraw_forgot_pass.svg" />
+    <Content Include="Assets\Login\own_img\undraw_modern_design_v3wv.svg" />
+    <Content Include="Assets\Login\own_img\undraw_register.svg" />
+    <Content Include="Assets\Login\own_img\user-circle.svg" />
     <Content Include="Assets\Login\vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="Assets\Login\vendor\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="Assets\Login\vendor\bootstrap\js\bootstrap.js" />
@@ -2229,11 +2235,12 @@
     <Content Include="Views\Comparativo\_Compare.cshtml" />
     <Content Include="Views\EstadoResultado\Index.cshtml" />
     <Content Include="Views\EstadoResultado\_SectionStateResult.cshtml" />
+    <Content Include="Views\Shared\_LayoutForgotPass.cshtml" />
+    <Content Include="Views\Access\ForgotPass.cshtml" />
+    <Content Include="Views\UserInformation\Perfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Logs\" />
-    <Folder Include="Assets\ForgotPassword\" />
-    <Folder Include="Assets\Register\" />
     <Folder Include="Views\Cerrar\" />
   </ItemGroup>
   <ItemGroup>
