@@ -103,8 +103,6 @@ namespace WebApplication2.Controllers
             return Redirect(Url.Content("~/LibroContable/"));
         }
 
-
-
         //*** EDITAR ***
         // GET: LibroContable
         public ActionResult Edit(int id)
@@ -159,7 +157,6 @@ namespace WebApplication2.Controllers
 
         //*** TRANSACCIONES LIBROCONTABLE***
         // GET: Detalle LibroContable
-
         public ActionResult Record(int id)
         {
             ViewBag.id_lb = id;
@@ -205,6 +202,11 @@ namespace WebApplication2.Controllers
                     oDetalle.impuesto = oTransaccion.IMPUESTO;
                     oDetalle.total = oTransaccion.TOTAL;
                     oDetalle.factura_id = oTransaccion.FACTURA_ID;
+
+                    //Obtener los datos de la factura
+                    var oFactura = db.FACTURA.Find(oTransaccion.FACTURA_ID);
+                    oDetalle.ImageFile = oFactura.IMAGE;
+                    oDetalle.numero_factura = oFactura.NUMERO;
                 }
             }
 

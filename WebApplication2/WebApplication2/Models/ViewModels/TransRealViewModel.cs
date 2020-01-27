@@ -40,9 +40,13 @@ namespace WebApplication2.Models.ViewModels
         [Display(Name = "Total")]
         public decimal total { get; set; }
 
+        [Display(Name = "Archivo de Imagen")]
+        public HttpPostedFileBase ImageFile { get; set; } //archivo de la imagen
+
         [Required]
-        [Display(Name = "Factura")]
-        public int factura_id { get; set; }
+        [Display(Name = "Numero Factura")]
+        public string numero_factura { get; set; }
+
     }
 
     public class FacturaViewModel{

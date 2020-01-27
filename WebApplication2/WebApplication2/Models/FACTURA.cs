@@ -22,7 +22,7 @@ namespace WebApplication2.Models
     
         public int ID_FACTURA { get; set; }
         public string NUMERO { get; set; }
-        public byte[] FOTO { get; set; }
+        public string IMAGE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TRANSACCION_REAL> TRANSACCION_REAL { get; set; }

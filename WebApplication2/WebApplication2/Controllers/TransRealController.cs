@@ -77,6 +77,7 @@ namespace WebApplication2.Controllers
             {
                 using (var db = new Entities())
                 {
+
                     //Agregando transaccion del presupuesto
                     TRANSACCION_REAL oTraReal = new TRANSACCION_REAL();
 
@@ -87,9 +88,35 @@ namespace WebApplication2.Controllers
                     oTraReal.IMPUESTO = model.impuesto;
                     oTraReal.TOTAL = model.total;
                     oTraReal.USU_ID = sesion_Usuario.ID_USUARIO;
-                    oTraReal.FACTURA_ID = 1;
+                    
 
-                    db.TRANSACCION_REAL.Add(oTraReal);
+                    
+
+                    //Agregando la imagen de la transaccion
+                    var numero_factura = model.numero_factura;
+                    var pic = String.Empty;
+                    var folder = "~/Content/Images";
+
+                    FACTURA ofactura = new FACTURA();
+                    ofactura.NUMERO = numero_factura;
+
+                    if (model.ImageFile != null)
+                    {
+                        pic = FilesHelper.UploadPhoto(model.ImageFile,folder); //llamo al metodo para que suba la imagen
+                        pic = string.Format("{0}/{1}",folder,pic);
+                        ofactura.IMAGE = pic;
+                    }
+                    else
+                    {
+                        ofactura.IMAGE = "";
+                    }
+                    
+                    db.FACTURA.Add(ofactura); //guardo  la factura en la base
+                    db.SaveChanges();
+
+                    oTraReal.FACTURA_ID = ofactura.ID_FACTURA; //obtengo el id de la ultima factura ingresada
+
+                    db.TRANSACCION_REAL.Add(oTraReal); //guardo la transaccion en la base
                     db.SaveChanges();
 
                     //Agregando detalle de la transaccion al presupuesto

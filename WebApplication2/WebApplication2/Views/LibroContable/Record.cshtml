@@ -42,6 +42,7 @@
                             <th>Subtotal</th>
                             <th>Impuesto</th>
                             <th>Total</th>
+                            <th>Factura</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -54,6 +55,7 @@
                             <th>Subtotal</th>
                             <th>Impuesto</th>
                             <th>Total</th>
+                            <th>Factura</th>
                             <th></th>
                         </tr>
                     </tfoot>
@@ -68,6 +70,12 @@
                                 <td>@oElemento.subtotal</td>
                                 <td>@oElemento.impuesto</td>
                                 <td>@oElemento.total</td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(oElemento.ImageFile))
+                                    {
+                                        <img src="@Url.Content(oElemento.ImageFile)" alt="Image" style="width:100px; height:150px; max-width:100%;height:auto;"/>
+                                    }
+                                </td>
                                 <td>
                                     <div class="d-sm-flex align-items-center">
                                         <a href="@Url.Action("Edit", "TransReal",new { id = oElemento.tra_id })" class="btn btn-warning btn-circle">

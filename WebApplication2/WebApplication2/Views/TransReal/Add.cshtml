@@ -22,7 +22,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                @using (Html.BeginForm("Add", "TransReal", FormMethod.Post, new { role = "form", @class = "" }))
+                @using (Html.BeginForm("Add", "TransReal", FormMethod.Post, new {enctype="multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken() /*atributo de seguridad helper, no hagan peticiones de fuera*/
 
@@ -58,6 +58,17 @@
                     @Html.LabelFor(d => d.total)
                     @Html.Label("*")
                     @Html.TextBoxFor(d => d.total, new { @class = "form-control", @required = "required" })
+
+
+                    @Html.LabelFor(d => d.ImageFile)
+                    @Html.Label("*")
+                    <span class="btn btn-default btn-file">
+                        @Html.TextBoxFor(d => d.ImageFile, new { @type = "file", @class = "form-control"  })
+                    </span>
+
+                    @Html.LabelFor(d => d.numero_factura)
+                    @Html.Label("*")
+                    @Html.TextBoxFor(d => d.numero_factura, new { @class = "form-control", @required = "required" })
 
 
                     <br />

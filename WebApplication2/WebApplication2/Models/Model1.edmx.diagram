@@ -31,13 +31,13 @@
         <AssociationConnector Association="Model.FK_TRANSACC_REAL_RUBRO" />
         <AssociationConnector Association="Model.TRANSA_PRE_USUARIO__FK" />
         <AssociationConnector Association="Model.TRANSA_REAL_USUARIO__FK" />
-        <EntityTypeShape EntityType="Model.FACTURA" Width="1.5" PointX="8.125" PointY="5.5" />
-        <AssociationConnector Association="Model.FK_TRANSACC_RELATIONS_FACTURA" />
         <EntityTypeShape EntityType="Model.EMPRESA" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model.IDIOMA" Width="1.5" PointX="5.625" PointY="14" />
         <AssociationConnector Association="Model.IDIOMA_USUARIO_ID_USUARIO_FK" />
         <EntityTypeShape EntityType="Model.ESTADO_RESULTADO" Width="1.5" PointX="7.5" PointY="20.125" />
         <AssociationConnector Association="Model.FK_ESTADO_R_RELATIONS_LIBRO_CO" />
+        <EntityTypeShape EntityType="Model.FACTURA" Width="1.5" PointX="3.375" PointY="0.875" />
+        <AssociationConnector Association="Model.FK_TRANSACC_RELATIONS_FACTURA" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

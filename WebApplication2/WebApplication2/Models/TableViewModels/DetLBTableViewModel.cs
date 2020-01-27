@@ -21,5 +21,9 @@ namespace WebApplication2.Models.TableViewModels
         public decimal subtotal { get; set; }
         public decimal impuesto { get; set; }
         public decimal total { get; set; }
+
+        public string numero_factura { get; set; }
+        public string ImageFile { get; set; }
+        
     }
 }
